@@ -1,3 +1,5 @@
+# Developer Environment
+
 # BoardGame Hub 🎲
 
 Repositório inicial do projeto de gerenciamento e marketplace de jogos de tabuleiro.
