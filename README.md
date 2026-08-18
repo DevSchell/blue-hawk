@@ -94,15 +94,15 @@ Quando a estrutura inicial estiver pronta, você precisará de:
 
 #### MatchParticipant
 
-| Método | Rota                         | Descrição                                                        |
-|--------|------------------------------|------------------------------------------------------------------|
-| POST   | `/match-participants         | adicionar um user a uma partida (a partir de um matchId e UserId |
-| PUT    | `/match-participants/{uuid}` | Atualizar participante (completo)                                |
-| PATCH  | `/match-participants/{uuid}` | Atualizar participante (parcial)                                 |
-| GET    | `/match-participants/{uuid}` | Detalhar uma participante específica                             |
-| GET    | `/macth-participants`        | Listar participantes (query params: `?matchId=`)                 |
-| DELETE | `/match-participants/{uuid}` | Remover participante da partida                                  |
-| DELETE | `/match-participants/{uuid}` | Remover participante da partida                                  |
+| Método | Rota                 | Descrição                                                        |
+|--------|----------------------|------------------------------------------------------------------|
+| POST   | `/match-participants | Adicionar um user a uma partida (a partir de um matchId e UserId |
+| PUT    | `/match-user/{uuid}` | Atualizar participante (completo)                                |
+| PATCH  | `/match-user/{uuid}` | Atualizar participante (parcial)                                 |
+| GET    | `/match-user/{uuid}` | Detalhar uma participante específica                             |
+| GET    | `/macth-user`        | Listar participantes (query params: `?matchId=`)                 |
+| DELETE | `/match-user/{uuid}` | Remover participante da partida                                  |
+| DELETE | `/match-user/{uuid}` | Remover participante da partida                                  |
 
 ### Boardgame
 
