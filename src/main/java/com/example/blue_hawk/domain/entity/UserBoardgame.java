@@ -7,9 +7,9 @@ public class UserBoardgame {
     private UUID userId;
     private UUID boardgameId;
 
-    public UserBoardgame(UUID userId, UUID boardgameId) {
-        this.userId = this.userId;
-        this.boardgameId = this.boardgameId;
+    public UserBoardgame(String userId, String boardgameId) {
+        this.userId = UUID.fromString(userId);
+        this.boardgameId = UUID.fromString(boardgameId);
         this.id = generateUUID();
     }
 
