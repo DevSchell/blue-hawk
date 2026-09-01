@@ -54,16 +54,18 @@ spring.application.name=boardgame-hub
 spring.datasource.url=jdbc:mysql://localhost:3306/boardgame_hub
 spring.datasource.username=root
 spring.datasource.password=sua_senha_aqui
-
 spring.jpa.hibernate.ddl-auto=validate
-
 spring.flyway.enabled=true
 ```
 
 **Observações:**
-- `ddl-auto=validate` faz o Hibernate apenas validar se o schema do banco bate com as entidades — quem cria e atualiza as tabelas é o Flyway, não o Hibernate.
-- Com `spring.flyway.enabled=true`, ao subir a aplicação o Flyway roda automaticamente as migrations presentes em `src/main/resources/db/migration` (arquivos no padrão `V1__descricao.sql`, `V2__descricao.sql`, etc.).
-- Ajuste `username`, `password` e o nome do banco (`boardgame_hub`) conforme o seu ambiente. Nunca versione senhas reais — use variáveis de ambiente em produção (ex: `${DB_PASSWORD}`).
+
+- `ddl-auto=validate` faz o Hibernate apenas validar se o schema do banco bate com as entidades — quem cria e atualiza
+  as tabelas é o Flyway, não o Hibernate.
+- Com `spring.flyway.enabled=true`, ao subir a aplicação o Flyway roda automaticamente as migrations presentes em
+  `src/main/resources/db/migration` (arquivos no padrão `V1__descricao.sql`, `V2__descricao.sql`, etc.).
+- Ajuste `username`, `password` e o nome do banco (`boardgame_hub`) conforme o seu ambiente. Nunca versione senhas
+  reais — use variáveis de ambiente em produção (ex: `${DB_PASSWORD}`).
 
 Para rodar apenas a migration (criar/atualizar o schema do banco), basta iniciar a aplicação:
 
@@ -78,7 +80,7 @@ O Flyway vai aplicar automaticamente as migrations pendentes antes da aplicaçã
 #### User
 
 | Método | Rota                     | Descrição                      |
-|--------|--------------------------|---------------------------------|
+|--------|--------------------------|--------------------------------|
 | POST   | `/users`                 | Criar um usuário               |
 | POST   | `/users/authenticate`    | Autenticar um usuário          |
 | PUT    | `/users/{uuid}`          | Atualizar perfil (completo)    |
@@ -90,52 +92,52 @@ O Flyway vai aplicar automaticamente as migrations pendentes antes da aplicaçã
 
 #### UserBoardgame
 
-| Método | Rota                      | Descrição                                              |
-|--------|---------------------------|---------------------------------------------------------|
-| POST   | `/user-boardgames`        | Criar uma posse                                         |
-| PUT    | `/user-boardgames/{uuid}` | Atualizar posse (completo)                              |
-| PATCH  | `/user-boardgames/{uuid}` | Atualizar posse (parcial)                               |
-| GET    | `/user-boardgames/{uuid}` | Detalhar uma posse específica                           |
-| GET    | `/user-boardgames`        | Listar posses (query params: `?userId=&boardgameId=`)  |
-| DELETE | `/user-boardgames/{uuid}` | Remover posse                                           |
+| Método | Rota                      | Descrição                                             |
+|--------|---------------------------|-------------------------------------------------------|
+| POST   | `/user-boardgames`        | Criar uma posse                                       |
+| PUT    | `/user-boardgames/{uuid}` | Atualizar posse (completo)                            |
+| PATCH  | `/user-boardgames/{uuid}` | Atualizar posse (parcial)                             |
+| GET    | `/user-boardgames/{uuid}` | Detalhar uma posse específica                         |
+| GET    | `/user-boardgames`        | Listar posses (query params: `?userId=&boardgameId=`) |
+| DELETE | `/user-boardgames/{uuid}` | Remover posse                                         |
 
 #### Offer
 
 | Método | Rota             | Descrição                                                      |
-|--------|------------------|-----------------------------------------------------------------|
+|--------|------------------|----------------------------------------------------------------|
 | POST   | `/offers`        | Criar uma oferta (a partir de um `userBoardgameId`)            |
-| PUT    | `/offers/{uuid}` | Atualizar oferta (completo)                                     |
+| PUT    | `/offers/{uuid}` | Atualizar oferta (completo)                                    |
 | PATCH  | `/offers/{uuid}` | Atualizar oferta (parcial, ex: só o preço)                     |
-| GET    | `/offers/{uuid}` | Detalhar uma oferta específica                                  |
+| GET    | `/offers/{uuid}` | Detalhar uma oferta específica                                 |
 | GET    | `/offers`        | Listar ofertas (query params: `?userId=&boardgameId=&status=`) |
-| DELETE | `/offers/{uuid}` | Remover oferta                                                  |
+| DELETE | `/offers/{uuid}` | Remover oferta                                                 |
 
 #### Match
 
-| Método | Rota              | Descrição                                        |
-|--------|-------------------|----------------------------------------------------|
-| POST   | `/matches`        | Criar uma partida                                 |
-| PUT    | `/matches/{uuid}` | Atualizar partida (completo)                      |
-| PATCH  | `/matches/{uuid}` | Atualizar partida (parcial)                       |
-| GET    | `/matches/{uuid}` | Detalhar uma partida específica                   |
-| GET    | `/matches`        | Listar partidas (query params: `?boardgameId=`)   |
-| DELETE | `/matches/{uuid}` | Remover partida                                   |
+| Método | Rota              | Descrição                                       |
+|--------|-------------------|-------------------------------------------------|
+| POST   | `/matches`        | Criar uma partida                               |
+| PUT    | `/matches/{uuid}` | Atualizar partida (completo)                    |
+| PATCH  | `/matches/{uuid}` | Atualizar partida (parcial)                     |
+| GET    | `/matches/{uuid}` | Detalhar uma partida específica                 |
+| GET    | `/matches`        | Listar partidas (query params: `?boardgameId=`) |
+| DELETE | `/matches/{uuid}` | Remover partida                                 |
 
 #### MatchParticipant
 
-| Método | Rota                    | Descrição                                                          |
-|--------|-------------------------|----------------------------------------------------------------------|
-| POST   | `/match-participants`   | Adicionar um user a uma partida (a partir de um `matchId` e `userId`) |
-| PUT    | `/match-user/{uuid}`    | Atualizar participante (completo)                                     |
-| PATCH  | `/match-user/{uuid}`    | Atualizar participante (parcial)                                      |
-| GET    | `/match-user/{uuid}`    | Detalhar uma participante específica                                  |
-| GET    | `/match-user`           | Listar participantes (query params: `?matchId=`)                     |
-| DELETE | `/match-user/{uuid}`    | Remover participante da partida                                       |
+| Método | Rota                  | Descrição                                                             |
+|--------|-----------------------|-----------------------------------------------------------------------|
+| POST   | `/match-participants` | Adicionar um user a uma partida (a partir de um `matchId` e `userId`) |
+| PUT    | `/match-user/{uuid}`  | Atualizar participante (completo)                                     |
+| PATCH  | `/match-user/{uuid}`  | Atualizar participante (parcial)                                      |
+| GET    | `/match-user/{uuid}`  | Detalhar uma participante específica                                  |
+| GET    | `/match-user`         | Listar participantes (query params: `?matchId=`)                      |
+| DELETE | `/match-user/{uuid}`  | Remover participante da partida                                       |
 
 ### Boardgame
 
 | Método | Rota                          | Descrição                                  |
-|--------|-------------------------------|----------------------------------------------|
+|--------|-------------------------------|--------------------------------------------|
 | POST   | `/boardgames`                 | Cria um novo boardgame                     |
 | GET    | `/boardgames`                 | Listagem de boardgames no sistema          |
 | GET    | `/boardgames/{page}`          | Listagem paginada de boardgames no sistema |
@@ -145,10 +147,10 @@ O Flyway vai aplicar automaticamente as migrations pendentes antes da aplicaçã
 
 ### Publisher
 
-| Método | Rota                 | Descrição                                       |
-|--------|----------------------|----------------------------------------------------|
-| POST   | `/publishers`        | Cadastra uma nova editora                          |
-| GET    | `/publishers`        | Lista todas as editoras                            |
-| GET    | `/publishers/{page}` | Lista paginada de editoras                         |
-| GET    | `/publishers/{uuid}` | Busca os dados de uma editora com base no uuid     |
-| POST   | `/publishers/{uuid}` | Atualiza os dados de uma editora                   |
+| Método | Rota                 | Descrição                                      |
+|--------|----------------------|------------------------------------------------|
+| POST   | `/publishers`        | Cadastra uma nova editora                      |
+| GET    | `/publishers`        | Lista todas as editoras                        |
+| GET    | `/publishers/{page}` | Lista paginada de editoras                     |
+| GET    | `/publishers/{uuid}` | Busca os dados de uma editora com base no uuid |
+| POST   | `/publishers/{uuid}` | Atualiza os dados de uma editora               |
