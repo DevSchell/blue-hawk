@@ -18,7 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class PublisherModel {
     @Id
-    @Column(name = "uuid", nullable = false, updatable = false, length = 36)
+    @Column(name = "id", nullable = false, updatable = false, length = 36)
     private UUID uuid;
 
     @Column(name = "name", nullable = false, length = 150)
@@ -26,7 +26,4 @@ public class PublisherModel {
 
     @Column(name = "country", nullable = false, length = 150)
     private String country;
-
-    @Column(name = "release_date", nullable = false)
-    private LocalDate releaseDate;
 }

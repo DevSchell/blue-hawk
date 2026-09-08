@@ -1,12 +1,9 @@
 package com.example.blue_hawk.domain.entity;
 
-import lombok.Getter;
-
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Getter
-///  Represents the responsible entity for the [BoardGame]
+///  Represents the responsible entity for the BoardGame
 public class Publisher {
     private final UUID uuid;
     private final String name;
