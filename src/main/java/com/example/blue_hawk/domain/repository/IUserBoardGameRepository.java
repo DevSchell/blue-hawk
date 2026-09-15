@@ -11,11 +11,11 @@ public interface IUserBoardGameRepository {
 
     UserBoardgame save(UserBoardgame userBoardgame);
 
-    Optional<UserBoardgame> findById(UserBoardgame userBoardgame);
+    Optional<UserBoardgame> findById(UUID userBoardgameId);
 
-    Page<UserBoardgame> findAll(UUID userId, UUID boardgameId);
+    Page<UserBoardgame> findAll(UUID userBId, UUID boardgameId);
 
-    void deleteById(UserBoardgame userBoardgame);
+    void deleteById(String userBoardgame);
 
     boolean existsById(UserBoardgame userBoardgame);
 }
