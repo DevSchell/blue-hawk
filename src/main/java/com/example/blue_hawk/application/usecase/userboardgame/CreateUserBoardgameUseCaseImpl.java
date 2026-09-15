@@ -21,6 +21,7 @@ public class CreateUserBoardgameUseCaseImpl implements CreateUserBoardgameUseCas
 
         UserBoardgame savedUserBoardgame = userBoardGameRepository.save(userBoardgame);
 
-        return new CreateUserBoardgameOutput(savedUserBoardgame.getId().toString(), savedUserBoardgame.getUserId().toString(), savedUserBoardgame.getBoardgameId().toString());
+        return new CreateUserBoardgameOutput(savedUserBoardgame.getId().toString(),
+                savedUserBoardgame.getUserId().toString(), savedUserBoardgame.getBoardgameId().toString());
     }
 }

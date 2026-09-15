@@ -1,5 +1,5 @@
 package com.example.blue_hawk.application.dto.userboardgame;
 
-public record DeleteUserBoardgameCommand(
+public record DeleteUserBoardgameOutput(
         String id) {
 }
