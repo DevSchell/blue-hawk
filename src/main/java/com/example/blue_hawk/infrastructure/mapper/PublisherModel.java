@@ -24,6 +24,6 @@ public class PublisherModel {
     @Column(name = "name", nullable = false, length = 150)
     private String name;
 
-    @Column(name = "country", nullable = false, length = 150)
-    private String country;
+    @Column(name = "country", nullable = false)
+    private int country;
 }

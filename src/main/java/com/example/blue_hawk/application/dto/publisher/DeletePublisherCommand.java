@@ -1,4 +1,6 @@
 package com.example.blue_hawk.application.dto.publisher;
 
-public record DeletePublisherCommand() {
+public record DeletePublisherCommand(
+        String id
+) {
 }

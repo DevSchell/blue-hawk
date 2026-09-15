@@ -1,4 +1,8 @@
 package com.example.blue_hawk.application.dto.publisher;
 
-public record UpdatePublisherCommand() {
+public record UpdatePublisherCommand(
+        String id,
+        String name,
+        int country
+) {
 }

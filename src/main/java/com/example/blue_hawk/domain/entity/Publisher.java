@@ -1,25 +1,49 @@
 package com.example.blue_hawk.domain.entity;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
-///  Represents the responsible entity for the BoardGame
 public class Publisher {
-    private final UUID uuid;
-    private final String name;
-    private final String country;
-    private final LocalDate releaseDate;
+    private UUID id;
+    private String name;
+    private int country;
 
-    ///  Constructor used in order to create a new [Publisher] without uuid
-    public Publisher(String name, String country, LocalDate releaseDate) {
-        this(UUID.randomUUID(), name, country, releaseDate);
-    }
-
-    ///  Constructor used in order to create a new [Publisher]  that came from the database
-    public Publisher(UUID uuid, String name, String country, LocalDate releaseDate) {
-        this.uuid = uuid;
+    public Publisher(String name, int country) {
         this.name = name;
         this.country = country;
-        this.releaseDate = releaseDate;
+        this.id = generateUUID();
+    }
+
+    public Publisher(UUID id, String name, int country) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
+    }
+
+    private UUID generateUUID() {
+        return UUID.randomUUID();
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCountry() {
+        return country;
+    }
+
+    public void setCountry(int country) {
+        this.country = country;
     }
 }
