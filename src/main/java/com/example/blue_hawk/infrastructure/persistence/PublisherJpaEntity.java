@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "Publisher")
-public class PublisherEntity {
+public class PublisherJpaEntity {
     @Id
     @Column(name = "id", nullable = false, updatable = false, length = 36)
     private UUID id;
@@ -20,10 +20,10 @@ public class PublisherEntity {
     @Column(name = "country", nullable = false)
     private int country;
 
-    public PublisherEntity() {
+    public PublisherJpaEntity() {
     }
 
-    public PublisherEntity(UUID id, String name, int country) {
+    public PublisherJpaEntity(UUID id, String name, int country) {
         this.id = id;
         this.name = name;
         this.country = country;
