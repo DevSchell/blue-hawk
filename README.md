@@ -40,12 +40,40 @@ desktop/web.
 
 ### 📋 Pré-requisitos para Rodar Localmente
 
-Quando a estrutura inicial estiver pronta, você precisará de:
-
 - JDK 17+
 - Flutter SDK
-- Um banco de dados instalado ou rodando via container (a definir)
+- MySQL instalado ou rodando via container
 - IDE de sua preferência (VS Code, IntelliJ, Android Studio)
+
+### ⚙️ Configuração
+
+Antes de rodar o projeto, crie o arquivo `src/main/resources/application.properties` com o seguinte conteúdo básico:
+
+```properties
+spring.application.name=boardgame-hub
+spring.datasource.url=jdbc:mysql://localhost:3306/boardgame_hub
+spring.datasource.username=root
+spring.datasource.password=sua_senha_aqui
+spring.jpa.hibernate.ddl-auto=validate
+spring.flyway.enabled=true
+```
+
+**Observações:**
+
+- `ddl-auto=validate` faz o Hibernate apenas validar se o schema do banco bate com as entidades — quem cria e atualiza
+  as tabelas é o Flyway, não o Hibernate.
+- Com `spring.flyway.enabled=true`, ao subir a aplicação o Flyway roda automaticamente as migrations presentes em
+  `src/main/resources/db/migration` (arquivos no padrão `V1__descricao.sql`, `V2__descricao.sql`, etc.).
+- Ajuste `username`, `password` e o nome do banco (`boardgame_hub`) conforme o seu ambiente. Nunca versione senhas
+  reais — use variáveis de ambiente em produção (ex: `${DB_PASSWORD}`).
+
+Para rodar apenas a migration (criar/atualizar o schema do banco), basta iniciar a aplicação:
+
+```bash
+./mvnw spring-boot:run
+```
+
+O Flyway vai aplicar automaticamente as migrations pendentes antes da aplicação subir.
 
 ### Lista de API
 
@@ -88,24 +116,23 @@ Quando a estrutura inicial estiver pronta, você precisará de:
 
 | Método | Rota              | Descrição                                       |
 |--------|-------------------|-------------------------------------------------|
-| POST   | `/matches         | Criar uma partida                               |
+| POST   | `/matches`        | Criar uma partida                               |
 | PUT    | `/matches/{uuid}` | Atualizar partida (completo)                    |
 | PATCH  | `/matches/{uuid}` | Atualizar partida (parcial)                     |
 | GET    | `/matches/{uuid}` | Detalhar uma partida específica                 |
-| GET    | `/macthes`        | Listar partidas (query params: `?boardgameId=`) |
+| GET    | `/matches`        | Listar partidas (query params: `?boardgameId=`) |
 | DELETE | `/matches/{uuid}` | Remover partida                                 |
 
 #### MatchParticipant
 
-| Método | Rota                 | Descrição                                                        |
-|--------|----------------------|------------------------------------------------------------------|
-| POST   | `/match-participants | Adicionar um user a uma partida (a partir de um matchId e UserId |
-| PUT    | `/match-user/{uuid}` | Atualizar participante (completo)                                |
-| PATCH  | `/match-user/{uuid}` | Atualizar participante (parcial)                                 |
-| GET    | `/match-user/{uuid}` | Detalhar uma participante específica                             |
-| GET    | `/macth-user`        | Listar participantes (query params: `?matchId=`)                 |
-| DELETE | `/match-user/{uuid}` | Remover participante da partida                                  |
-| DELETE | `/match-user/{uuid}` | Remover participante da partida                                  |
+| Método | Rota                  | Descrição                                                             |
+|--------|-----------------------|-----------------------------------------------------------------------|
+| POST   | `/match-participants` | Adicionar um user a uma partida (a partir de um `matchId` e `userId`) |
+| PUT    | `/match-user/{uuid}`  | Atualizar participante (completo)                                     |
+| PATCH  | `/match-user/{uuid}`  | Atualizar participante (parcial)                                      |
+| GET    | `/match-user/{uuid}`  | Detalhar uma participante específica                                  |
+| GET    | `/match-user`         | Listar participantes (query params: `?matchId=`)                      |
+| DELETE | `/match-user/{uuid}`  | Remover participante da partida                                       |
 
 ### Boardgame
 
