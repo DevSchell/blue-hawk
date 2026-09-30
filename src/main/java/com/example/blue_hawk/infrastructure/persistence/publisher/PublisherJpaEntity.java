@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Publisher")
+@Table(name = "publisher")
 public class PublisherEntity {
     @Id
     @Column(name = "id", nullable = false, updatable = false, length = 36)

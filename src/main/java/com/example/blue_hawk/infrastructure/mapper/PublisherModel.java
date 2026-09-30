@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Publisher")
+@Table(name = "publisher")
 @Getter
 @Setter
 @NoArgsConstructor
