@@ -1,11 +1,34 @@
 package com.example.blue_hawk.domain.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 import java.util.UUID;
 
+@Entity
+@Table(name = "UserBoardGame")
 public class UserBoardgame {
+
+    @Id
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(name = "id", nullable = false, updatable = false, length = 36)
     private UUID id;
+
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(name = "User_id", nullable = false, length = 36)
     private UUID userId;
+
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(name = "BoardGame_id", nullable = false, length = 36)
     private UUID boardgameId;
+
+    protected UserBoardgame() {
+        // JPA exigência do Hibernate
+    }
 
     public UserBoardgame(String userId, String boardgameId) {
         this.userId = UUID.fromString(userId);

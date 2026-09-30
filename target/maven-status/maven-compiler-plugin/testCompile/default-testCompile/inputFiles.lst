@@ -1,0 +1,9 @@
+C:\hoje\blue-hawk\src\test\java\com\example\blue_hawk\application\usecase\user\AuthenticateUserUseCaseImplTest.java
+C:\hoje\blue-hawk\src\test\java\com\example\blue_hawk\application\usecase\user\ChangeUserPasswordUseCaseImplTest.java
+C:\hoje\blue-hawk\src\test\java\com\example\blue_hawk\application\usecase\user\CreateUserUseCaseImplTest.java
+C:\hoje\blue-hawk\src\test\java\com\example\blue_hawk\application\usecase\user\DeleteUserUseCaseImplTest.java
+C:\hoje\blue-hawk\src\test\java\com\example\blue_hawk\application\usecase\user\GetUserUseCaseImplTest.java
+C:\hoje\blue-hawk\src\test\java\com\example\blue_hawk\application\usecase\user\ListUserUseCaseImplTest.java
+C:\hoje\blue-hawk\src\test\java\com\example\blue_hawk\application\usecase\user\UpdateUserUseCaseImplTest.java
+C:\hoje\blue-hawk\src\test\java\com\example\blue_hawk\BlueHawkApplicationTests.java
+C:\hoje\blue-hawk\src\test\java\com\example\blue_hawk\infrastructure\security\JwtTokenServiceTest.java
