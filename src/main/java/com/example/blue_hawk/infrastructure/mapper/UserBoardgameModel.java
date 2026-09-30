@@ -8,22 +8,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name = "publisher")
+@Table(name = "user_board_game")
 @Getter
 @Setter
 @NoArgsConstructor
-public class PublisherModel {
+public class UserBoardgameModel {
     @Id
     @Column(name = "id", nullable = false, updatable = false, length = 36)
-    private UUID uuid;
+    private UUID id;
 
-    @Column(name = "name", nullable = false, length = 150)
-    private String name;
+    @Column(name = "user_id", nullable = false, length = 36)
+    private UUID userId;
 
-    @Column(name = "country", nullable = false)
-    private int country;
+    @Column(name = "board_game_id", nullable = false, length = 36)
+    private UUID boardgameId;
 }
