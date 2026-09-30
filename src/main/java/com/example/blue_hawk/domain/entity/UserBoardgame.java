@@ -13,6 +13,12 @@ public class UserBoardgame {
         this.id = generateUUID();
     }
 
+    public UserBoardgame(UUID id, UUID userId, UUID boardgameId) {
+        this.id = id;
+        this.userId = userId;
+        this.boardgameId = boardgameId;
+    }
+
     private UUID generateUUID() {
         return UUID.randomUUID();
     }

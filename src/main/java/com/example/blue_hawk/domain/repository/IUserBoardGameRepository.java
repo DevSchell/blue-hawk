@@ -13,7 +13,7 @@ public interface IUserBoardGameRepository {
 
     Optional<UserBoardgame> findById(UUID userBoardgameId);
 
-    Page<UserBoardgame> findAll(UUID userBId, UUID boardgameId);
+    Page<UserBoardgame> findAll(UUID userId, UUID boardgameId, int page, int size);
 
     void deleteById(String userBoardgame);
 
