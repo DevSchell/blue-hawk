@@ -40,40 +40,34 @@ desktop/web.
 
 ### 📋 Pré-requisitos para Rodar Localmente
 
-- JDK 17+
-- Flutter SDK
-- MySQL instalado ou rodando via container
-- IDE de sua preferência (VS Code, IntelliJ, Android Studio)
+- JDK 21 (ou superior compatível)
+- Apache Maven instalado (`mvn` disponível no terminal)
+- PostgreSQL instalado/rodando e acessível
 
-### ⚙️ Configuração
+### ⚙️ Configuração e execução
 
-Antes de rodar o projeto, crie o arquivo `src/main/resources/application.properties` com o seguinte conteúdo básico:
+O backend usa PostgreSQL. Configure as variáveis no arquivo `.env` (ele não deve ser commitado):
 
-```properties
-spring.application.name=boardgame-hub
-spring.datasource.url=jdbc:mysql://localhost:3306/boardgame_hub
-spring.datasource.username=root
-spring.datasource.password=sua_senha_aqui
-spring.jpa.hibernate.ddl-auto=validate
-spring.flyway.enabled=true
+```dotenv
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=postgres
+DB_USERNAME=postgres
+DB_PASSWORD=sua_senha
 ```
 
-**Observações:**
-
-- `ddl-auto=validate` faz o Hibernate apenas validar se o schema do banco bate com as entidades — quem cria e atualiza
-  as tabelas é o Flyway, não o Hibernate.
-- Com `spring.flyway.enabled=true`, ao subir a aplicação o Flyway roda automaticamente as migrations presentes em
-  `src/main/resources/db/migration` (arquivos no padrão `V1__descricao.sql`, `V2__descricao.sql`, etc.).
-- Ajuste `username`, `password` e o nome do banco (`boardgame_hub`) conforme o seu ambiente. Nunca versione senhas
-  reais — use variáveis de ambiente em produção (ex: `${DB_PASSWORD}`).
-
-Para rodar apenas a migration (criar/atualizar o schema do banco), basta iniciar a aplicação:
+Configure as variáveis de conexão PostgreSQL no ambiente antes de abrir o terminal. O Spring Boot não carrega `.env`
+automaticamente. Na raiz do repositório, inicie o backend com o comando Maven:
 
 ```bash
-./mvnw spring-boot:run
+mvn spring-boot:run
 ```
 
-O Flyway vai aplicar automaticamente as migrations pendentes antes da aplicação subir.
+O Flyway aplica automaticamente as migrations pendentes de `src/main/resources/db/migration` ao iniciar a aplicação.
+O Hibernate usa `ddl-auto=validate`, então o schema do banco precisa corresponder às entidades. O projeto não configura
+o plugin Maven do Flyway; por isso, a forma documentada de aplicar migrations é iniciar a aplicação.
+
+Em seguida, a API fica disponível em `http://localhost:8080`.
 
 ### Lista de API
 

@@ -1,16 +1,19 @@
-package com.example.blue_hawk.infrastructure.persistence;
+package com.example.blue_hawk.infrastructure.persistence.publisher;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.JdbcTypeCode;
 
+import java.sql.Types;
 import java.util.UUID;
 
 @Entity
 @Table(name = "publisher")
-public class PublisherEntity {
+public class PublisherJpaEntity {
     @Id
+    @JdbcTypeCode(Types.CHAR)
     @Column(name = "id", nullable = false, updatable = false, length = 36)
     private UUID id;
 
@@ -20,10 +23,10 @@ public class PublisherEntity {
     @Column(name = "country", nullable = false)
     private int country;
 
-    public PublisherEntity() {
+    public PublisherJpaEntity() {
     }
 
-    public PublisherEntity(UUID id, String name, int country) {
+    public PublisherJpaEntity(UUID id, String name, int country) {
         this.id = id;
         this.name = name;
         this.country = country;

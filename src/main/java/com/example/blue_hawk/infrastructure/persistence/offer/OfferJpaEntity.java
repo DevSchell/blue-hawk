@@ -7,12 +7,14 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.JdbcTypeCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.sql.Types;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -25,9 +27,11 @@ import java.util.UUID;
 public class OfferJpaEntity {
 
     @Id
+    @JdbcTypeCode(Types.CHAR)
     @Column(name = "id", nullable = false, updatable = false, length = 36)
     private UUID id;
 
+    @JdbcTypeCode(Types.CHAR)
     @Column(name = "user_board_game_id", nullable = false, length = 36)
     private UUID userBoardgameId;
 
