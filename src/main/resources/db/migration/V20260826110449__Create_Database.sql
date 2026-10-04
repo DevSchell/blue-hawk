@@ -9,21 +9,31 @@ CREATE TABLE board_game (
                             release_date date  NOT NULL,
                             player_number int  NOT NULL,
                             gameplay_time int  NOT NULL,
-                            CONSTRAINT board_game_pk PRIMARY KEY (id)
+                            status VARCHAR(20) NOT NULL DEFAULT 'ACTIVE',
+                            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                            CONSTRAINT board_game_pk PRIMARY KEY (id),
+                            CONSTRAINT board_game_status_chk CHECK (status IN ('ACTIVE', 'INACTIVE'))
 );
 
 -- Table: match
 CREATE TABLE `match` (
                          id CHAR(36) NOT NULL,
                          board_game_id CHAR(36) NOT NULL,
-                         CONSTRAINT match_pk PRIMARY KEY (id)
+                         status VARCHAR(20) NOT NULL DEFAULT 'SCHEDULED',
+                         played_at DATETIME NULL,
+                         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                         updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                         CONSTRAINT match_pk PRIMARY KEY (id),
+                         CONSTRAINT match_status_chk CHECK (status IN ('SCHEDULED', 'IN_PROGRESS', 'FINISHED', 'CANCELLED'))
 );
 
 -- Table: match_user
 CREATE TABLE match_user (
+                            id CHAR(36) NOT NULL,
                             match_id CHAR(36) NOT NULL,
                             user_id CHAR(36) NOT NULL,
-                            id CHAR(36) NOT NULL,
+                            score int NULL,
                             CONSTRAINT match_user_pk PRIMARY KEY (id)
 );
 
@@ -50,6 +60,8 @@ CREATE TABLE `user` (
                         email varchar(150)  NOT NULL,
                         password varchar(150)  NOT NULL,
                         role int  NOT NULL,
+                        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                        updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                         CONSTRAINT user_pk PRIMARY KEY (id)
 );
 
@@ -108,3 +120,20 @@ ALTER TABLE user_board_game ADD CONSTRAINT user_user_board_game FOREIGN KEY (use
 -- Reference: user_user_review (table: user_review)
 ALTER TABLE user_review ADD CONSTRAINT user_user_review FOREIGN KEY (user_id)
     REFERENCES `user` (id);
+
+-- Table: offer
+CREATE TABLE offer (
+    id CHAR(36) NOT NULL,
+    user_board_game_id CHAR(36) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'ACTIVE',
+    description VARCHAR(500) NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT offer_pk PRIMARY KEY (id),
+    CONSTRAINT offer_status_chk CHECK (status IN ('ACTIVE', 'INACTIVE', 'SOLD', 'CANCELLED'))
+);
+
+-- Reference: offer_user_board_game (table: offer)
+ALTER TABLE offer ADD CONSTRAINT offer_user_board_game FOREIGN KEY (user_board_game_id)
+    REFERENCES user_board_game (id);
