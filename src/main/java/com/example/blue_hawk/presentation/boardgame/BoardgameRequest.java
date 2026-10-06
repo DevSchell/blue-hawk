@@ -1,7 +1,6 @@
-package com.example.blue_hawk.presentation;
+package com.example.blue_hawk.presentation.boardgame;
 
-public record BoardgameResponse(
-        String id,
+public record BoardgameRequest(
         String name,
         String description,
         Integer releaseYear,

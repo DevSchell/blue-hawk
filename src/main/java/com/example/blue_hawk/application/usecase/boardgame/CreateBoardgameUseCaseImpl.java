@@ -2,7 +2,7 @@ package com.example.blue_hawk.application.usecase.boardgame;
 
 import com.example.blue_hawk.application.dto.boardgame.CreateBoardgameCommand;
 import com.example.blue_hawk.application.dto.boardgame.CreateBoardgameOutput;
-import com.example.blue_hawk.domain.entity.Boardgame;
+import com.example.blue_hawk.domain.entity.boardgame.Boardgame;
 import com.example.blue_hawk.domain.repository.IBoardgameRepository;
 import org.springframework.stereotype.Service;
 
