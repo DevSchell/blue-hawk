@@ -10,26 +10,23 @@ target/
 *.swp
 *.swo
 *~
-.DS_Store
 *.iml
+*.ipr
+*.iws
 .classpath
 .project
 .settings/
 bin/
-
-# Maven
-.mvn/
-mvnw
-mvnw.cmd
 
 # Gradle
 .gradle/
 build/
 
 # Database & Credenciais (SENSÍVEL!)
-src/main/resources/application.properties
-src/main/resources/application-*.properties
-!src/main/resources/application-example.properties
+# Removido application.properties do ignore, pois está usando variáveis de ambiente
+application-prod.properties
+application-dev.properties
+application-secret.properties
 
 # Environment variables
 .env
@@ -40,11 +37,11 @@ src/main/resources/application-*.properties
 *.log
 logs/
 
-# OS
+# Mac OS
 .DS_Store
 Thumbs.db
 
-# Node (se usar npm/webpack)
+# Node
 node_modules/
 package-lock.json
 yarn.lock
