@@ -18,14 +18,10 @@ CREATE TABLE board_game (
 
 -- Table: match
 CREATE TABLE match (
-    id            CHAR(36)    NOT NULL,
-    board_game_id CHAR(36)    NOT NULL,
-    status        VARCHAR(20) NOT NULL DEFAULT 'SCHEDULED',
-    played_at     TIMESTAMP   NULL,
-    created_at    TIMESTAMP   NOT NULL DEFAULT NOW(),
-    updated_at    TIMESTAMP   NOT NULL DEFAULT NOW(),
-    CONSTRAINT match_pk PRIMARY KEY (id),
-    CONSTRAINT match_status_chk CHECK (status IN ('SCHEDULED', 'IN_PROGRESS', 'FINISHED', 'CANCELLED'))
+    id               CHAR(36) NOT NULL,
+    userboardgame_id CHAR(36) NOT NULL,
+    max_users        INT      NOT NULL,
+    CONSTRAINT match_pk PRIMARY KEY (id)
 );
 
 -- Table: match_user
@@ -33,7 +29,6 @@ CREATE TABLE match_user (
     id       CHAR(36) NOT NULL,
     match_id CHAR(36) NOT NULL,
     user_id  CHAR(36) NOT NULL,
-    score    INT      NULL,
     CONSTRAINT match_user_pk PRIMARY KEY (id)
 );
 
@@ -87,7 +82,7 @@ CREATE TABLE user_review (
 -- Table: offer
 CREATE TABLE offer (
     id                  CHAR(36)        NOT NULL,
-    user_board_game_id  CHAR(36)        NOT NULL,
+    userboardgame_id    CHAR(36)        NOT NULL,
     price               DECIMAL(10, 2)  NOT NULL,
     status              VARCHAR(20)     NOT NULL DEFAULT 'ACTIVE',
     description         VARCHAR(500)    NULL,
@@ -110,9 +105,9 @@ ALTER TABLE user_board_game ADD CONSTRAINT board_game_user_board_game FOREIGN KE
 ALTER TABLE user_review ADD CONSTRAINT board_game_user_review FOREIGN KEY (board_game_id)
     REFERENCES board_game (id);
 
--- Reference: match_board_game (table: match)
-ALTER TABLE match ADD CONSTRAINT match_board_game FOREIGN KEY (board_game_id)
-    REFERENCES board_game (id);
+-- Reference: match_user_board_game (table: match)
+ALTER TABLE match ADD CONSTRAINT match_user_board_game FOREIGN KEY (userboardgame_id)
+    REFERENCES user_board_game (id);
 
 -- Reference: match_match_user (table: match_user)
 ALTER TABLE match_user ADD CONSTRAINT match_match_user FOREIGN KEY (match_id)
@@ -135,5 +130,5 @@ ALTER TABLE user_review ADD CONSTRAINT user_user_review FOREIGN KEY (user_id)
     REFERENCES "user" (id);
 
 -- Reference: offer_user_board_game (table: offer)
-ALTER TABLE offer ADD CONSTRAINT offer_user_board_game FOREIGN KEY (user_board_game_id)
+ALTER TABLE offer ADD CONSTRAINT offer_user_board_game FOREIGN KEY (userboardgame_id)
     REFERENCES user_board_game (id);
