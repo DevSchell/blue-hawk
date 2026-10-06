@@ -7,7 +7,7 @@ import com.example.blue_hawk.domain.repository.IMatchParticipantRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreateMatchParticipantUseCaseImpl implements CreateMatchParticipantUseCase{
+public class CreateMatchParticipantUseCaseImpl implements CreateMatchParticipantUseCase {
 
     private final IMatchParticipantRepository matchParticipantRepository;
 
@@ -17,11 +17,17 @@ public class CreateMatchParticipantUseCaseImpl implements CreateMatchParticipant
 
     @Override
     public CreateMatchParticipantOutput handle(CreateMatchParticipantCommand command) {
-        MatchParticipant matchParticipant = new MatchParticipant(command.userId(), command.matchId());
+        MatchParticipant matchParticipant = new MatchParticipant(
+                command.matchId(),
+                command.userId()
+        );
 
-        MatchParticipant savedMatchParticipant = matchParticipantRepository.save(matchParticipant);
+        MatchParticipant saved = matchParticipantRepository.save(matchParticipant);
 
-        return new CreateMatchParticipantOutput(savedMatchParticipant.getId().toString(),
-                savedMatchParticipant.getMatchId().toString(), savedMatchParticipant.getUserId().toString());
+        return new CreateMatchParticipantOutput(
+                saved.getId().toString(),
+                saved.getMatchId().toString(),
+                saved.getUserId().toString()
+        );
     }
 }

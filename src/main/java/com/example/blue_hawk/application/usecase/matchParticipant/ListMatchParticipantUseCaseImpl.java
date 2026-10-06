@@ -1,6 +1,5 @@
 package com.example.blue_hawk.application.usecase.matchParticipant;
 
-import com.example.blue_hawk.application.dto.match.ListMatchOutput;
 import com.example.blue_hawk.application.dto.matchParticipant.ListMatchParticipantOutput;
 import com.example.blue_hawk.application.dto.matchParticipant.ListMatchParticipantQuery;
 import com.example.blue_hawk.domain.repository.IMatchParticipantRepository;
@@ -10,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class ListMatchParticipantUseCaseImpl  implements  ListMatchParticipantUseCase{
+public class ListMatchParticipantUseCaseImpl implements ListMatchParticipantUseCase {
 
     private final IMatchParticipantRepository matchParticipantRepository;
 
@@ -20,17 +19,17 @@ public class ListMatchParticipantUseCaseImpl  implements  ListMatchParticipantUs
 
     @Override
     public List<ListMatchParticipantOutput> handle(ListMatchParticipantQuery query) {
-        UUID matchid = query.matchId() != null ? UUID.fromString(query.matchId()) : null;
-        UUID userId = query.userId() != null ? UUID.fromString(query.userId()): null;
+        UUID matchId = query.matchId() != null ? UUID.fromString(query.matchId()) : null;
+        UUID userId = query.userId() != null ? UUID.fromString(query.userId()) : null;
 
         return matchParticipantRepository
-                .findAll(matchid, userId, query.page(), query.size())
+                .findAll(matchId, userId, query.page(), query.size())
                 .getContent()
                 .stream()
-                .map(ub -> new ListMatchParticipantOutput(
-                        ub.getId().toString(),
-                        ub.getMatchId().toString(),
-                        ub.getUserId().toString()))
+                .map(mp -> new ListMatchParticipantOutput(
+                        mp.getId().toString(),
+                        mp.getMatchId().toString(),
+                        mp.getUserId().toString()))
                 .toList();
     }
 }

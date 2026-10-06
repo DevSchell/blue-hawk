@@ -10,11 +10,13 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface MatchParticipantJpaRepository extends JpaRepository<MatchParticipantJpaEntity, UUID>{
+public interface MatchParticipantJpaRepository extends JpaRepository<MatchParticipantJpaEntity, UUID> {
 
-    @Query("SELECT u FROM MatchJpaEntity u WHERE " +
-            "(:boardgameId IS NULL OR u.boardgameId = :boardgameId)")
-    Page<MatchParticipantJpaEntity> findAllFiltered(@Param("matchId") UUID matchId,
-                                                    @Param("userId") UUID userId,
-                                                    Pageable pageable);
+    @Query("SELECT mp FROM MatchParticipantJpaEntity mp WHERE " +
+           "(:matchId IS NULL OR mp.matchId = :matchId) AND " +
+           "(:userId IS NULL OR mp.userId = :userId)")
+    Page<MatchParticipantJpaEntity> findAllFiltered(
+            @Param("matchId") UUID matchId,
+            @Param("userId") UUID userId,
+            Pageable pageable);
 }

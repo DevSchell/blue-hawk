@@ -19,7 +19,8 @@ public class CreateMatchUseCaseImpl implements CreateMatchUseCase {
     public CreateMatchOutput handle(CreateMatchCommand command) {
         Match match = new Match(
                 command.boardgameId(),
-                command.userId()
+                command.userId(),
+                command.maxUsers()
         );
 
         Match saved = matchRepository.save(match);
@@ -27,7 +28,8 @@ public class CreateMatchUseCaseImpl implements CreateMatchUseCase {
         return new CreateMatchOutput(
                 saved.getId().toString(),
                 saved.getBoardgameId().toString(),
-                saved.getUserId().toString()
+                saved.getUserId().toString(),
+                saved.getMaxUsers()
         );
     }
 }

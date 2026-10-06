@@ -4,5 +4,4 @@ public record UpdateMatchParticipantOutput(
         String id,
         String matchId,
         String userId
-) {
-}
+) {}

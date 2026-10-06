@@ -7,17 +7,20 @@ public class Match {
     private UUID id;
     private UUID boardgameId;
     private UUID userId;
+    private Integer maxUsers;
 
-    public Match(String boardgameId, String userId) {
+    public Match(String boardgameId, String userId, Integer maxUsers) {
         this.id = UUID.randomUUID();
         this.boardgameId = UUID.fromString(boardgameId);
         this.userId = UUID.fromString(userId);
+        this.maxUsers = maxUsers;
     }
 
-    public Match(UUID id, UUID boardgameId, UUID userId) {
+    public Match(UUID id, UUID boardgameId, UUID userId, Integer maxUsers) {
         this.id = id;
         this.boardgameId = boardgameId;
         this.userId = userId;
+        this.maxUsers = maxUsers;
     }
 
     public UUID getId() {
@@ -42,5 +45,13 @@ public class Match {
 
     public void setUserId(UUID userId) {
         this.userId = userId;
+    }
+
+    public Integer getMaxUsers() {
+        return maxUsers;
+    }
+
+    public void setMaxUsers(Integer maxUsers) {
+        this.maxUsers = maxUsers;
     }
 }

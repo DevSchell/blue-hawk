@@ -1,10 +1,10 @@
 package com.example.blue_hawk.application.usecase.matchParticipant;
 
 import com.example.blue_hawk.application.dto.matchParticipant.DeleteMatchParticipantCommand;
-import com.example.blue_hawk.application.dto.matchParticipant.DeleteMatchParticipantOutput;
 import com.example.blue_hawk.domain.repository.IMatchParticipantRepository;
-
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class DeleteMatchParticipantUseCaseImpl implements DeleteMatchParticipantUseCase {
@@ -16,9 +16,11 @@ public class DeleteMatchParticipantUseCaseImpl implements DeleteMatchParticipant
     }
 
     @Override
-    public DeleteMatchParticipantOutput handle(DeleteMatchParticipantCommand command) {
-        matchParticipantRepository.deleteById(command.id());
-
-        return new DeleteMatchParticipantOutput(command.id());
+    public void handle(DeleteMatchParticipantCommand command) {
+        UUID id = UUID.fromString(command.id());
+        if (!matchParticipantRepository.existsById(id)) {
+            throw new RuntimeException("MatchParticipant not found with id: " + command.id());
+        }
+        matchParticipantRepository.deleteById(id);
     }
 }

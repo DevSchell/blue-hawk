@@ -26,24 +26,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/matches")
+@RequestMapping("/match-participants")
 public class MatchParticipantController {
 
     private final CreateMatchParticipantUseCase createMatchParticipantUseCase;
     private final GetMatchParticipantUseCase getMatchParticipantUseCase;
     private final ListMatchParticipantUseCase listMatchParticipantUseCase;
     private final UpdateMatchParticipantUseCase updateMatchParticipantUseCase;
-    private DeleteMatchParticipantUseCase deleteMatchParticipantUseCase;
+    private final DeleteMatchParticipantUseCase deleteMatchParticipantUseCase;
 
     public MatchParticipantController(CreateMatchParticipantUseCase createMatchParticipantUseCase,
-                           GetMatchParticipantUseCase getMatchParticipantUseCase,
-                           ListMatchParticipantUseCase listMatchParticipantUseCase,
-                           UpdateMatchParticipantUseCase updateMatchParticipantUseCase,
-                           DeleteMatchParticipantUseCase deleteMatchParticipantUseCase) {
+                                      GetMatchParticipantUseCase getMatchParticipantUseCase,
+                                      ListMatchParticipantUseCase listMatchParticipantUseCase,
+                                      UpdateMatchParticipantUseCase updateMatchParticipantUseCase,
+                                      DeleteMatchParticipantUseCase deleteMatchParticipantUseCase) {
         this.createMatchParticipantUseCase = createMatchParticipantUseCase;
         this.getMatchParticipantUseCase = getMatchParticipantUseCase;
         this.listMatchParticipantUseCase = listMatchParticipantUseCase;
@@ -58,8 +57,14 @@ public class MatchParticipantController {
                 request.userId()
         );
         CreateMatchParticipantOutput output = createMatchParticipantUseCase.handle(command);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new MatchParticipantResponse(output.id(), output.userId(), output.matchId()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(toResponse(output));
+    }
+
+    @GetMapping("/{uuid}")
+    public ResponseEntity<MatchParticipantResponse> getById(@PathVariable("uuid") String uuid) {
+        GetMatchParticipantQuery query = new GetMatchParticipantQuery(uuid);
+        GetMatchParticipantOutput output = getMatchParticipantUseCase.handle(query);
+        return ResponseEntity.ok(toResponse(output));
     }
 
     @GetMapping
@@ -69,36 +74,47 @@ public class MatchParticipantController {
             @RequestParam(name = "page", defaultValue = "0") Integer page,
             @RequestParam(name = "size", defaultValue = "10") Integer size) {
 
-        ListMatchParticipantQuery query = new ListMatchParticipantQuery(userId, matchId, page, size);
+        ListMatchParticipantQuery query = new ListMatchParticipantQuery(matchId, userId, page, size);
         List<ListMatchParticipantOutput> output = listMatchParticipantUseCase.handle(query);
 
         List<MatchParticipantResponse> response = output.stream()
-                .map(item -> new MatchParticipantResponse(item.id(), item.matchId(), item.userId()))
+                .map(o -> new MatchParticipantResponse(o.id(), o.matchId(), o.userId()))
                 .toList();
 
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{uuid}")
     public ResponseEntity<MatchParticipantResponse> update(
-            @PathVariable("id") String id,
+            @PathVariable("uuid") String uuid,
             @RequestBody MatchParticipantRequest request) {
 
         UpdateMatchParticipantCommand command = new UpdateMatchParticipantCommand(
-                id,
-                request.userId(),
-                request.matchId()
-
+                uuid,
+                request.matchId(),
+                request.userId()
         );
         UpdateMatchParticipantOutput output = updateMatchParticipantUseCase.handle(command);
-        return ResponseEntity.ok(new MatchParticipantResponse(output.id(), output.userId(), output.matchId()));
+        return ResponseEntity.ok(toResponse(output));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") String id) {
-        DeleteMatchParticipantCommand command = new DeleteMatchParticipantCommand(id);
-        deleteMatchParticipantUseCase.handle(command);
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<Void> delete(@PathVariable("uuid") String uuid) {
+        deleteMatchParticipantUseCase.handle(new DeleteMatchParticipantCommand(uuid));
         return ResponseEntity.noContent().build();
     }
 
+    // ── helpers ──────────────────────────────────────────────────────────────
+
+    private MatchParticipantResponse toResponse(CreateMatchParticipantOutput o) {
+        return new MatchParticipantResponse(o.id(), o.matchId(), o.userId());
+    }
+
+    private MatchParticipantResponse toResponse(GetMatchParticipantOutput o) {
+        return new MatchParticipantResponse(o.id(), o.matchId(), o.userId());
+    }
+
+    private MatchParticipantResponse toResponse(UpdateMatchParticipantOutput o) {
+        return new MatchParticipantResponse(o.id(), o.matchId(), o.userId());
+    }
 }

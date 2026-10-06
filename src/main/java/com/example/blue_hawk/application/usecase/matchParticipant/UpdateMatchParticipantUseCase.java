@@ -4,6 +4,5 @@ import com.example.blue_hawk.application.dto.matchParticipant.UpdateMatchPartici
 import com.example.blue_hawk.application.dto.matchParticipant.UpdateMatchParticipantOutput;
 
 public interface UpdateMatchParticipantUseCase {
-
     UpdateMatchParticipantOutput handle(UpdateMatchParticipantCommand command);
 }

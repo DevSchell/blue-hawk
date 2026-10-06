@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class UpdateMatchParticipantUseCaseImpl implements UpdateMatchParticipantUseCase{
+public class UpdateMatchParticipantUseCaseImpl implements UpdateMatchParticipantUseCase {
 
     private final IMatchParticipantRepository matchParticipantRepository;
 
@@ -21,16 +21,17 @@ public class UpdateMatchParticipantUseCaseImpl implements UpdateMatchParticipant
     public UpdateMatchParticipantOutput handle(UpdateMatchParticipantCommand command) {
         MatchParticipant matchParticipant = matchParticipantRepository
                 .findById(UUID.fromString(command.id()))
-                .orElseThrow(() -> new RuntimeException("MatchParticipant not found"));
+                .orElseThrow(() -> new RuntimeException("MatchParticipant not found with id: " + command.id()));
 
-        matchParticipant.setUserId(UUID.fromString(command.userId()));
         matchParticipant.setMatchId(UUID.fromString(command.matchId()));
+        matchParticipant.setUserId(UUID.fromString(command.userId()));
 
         MatchParticipant updated = matchParticipantRepository.save(matchParticipant);
 
         return new UpdateMatchParticipantOutput(
                 updated.getId().toString(),
                 updated.getMatchId().toString(),
-                updated.getMatchId().toString());
+                updated.getUserId().toString()
+        );
     }
 }

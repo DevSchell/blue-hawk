@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class GetMatchParticipantUseCaseImpl implements  GetMatchParticipantUseCase{
+public class GetMatchParticipantUseCaseImpl implements GetMatchParticipantUseCase {
 
     private final IMatchParticipantRepository matchParticipantRepository;
 
@@ -21,11 +21,12 @@ public class GetMatchParticipantUseCaseImpl implements  GetMatchParticipantUseCa
     public GetMatchParticipantOutput handle(GetMatchParticipantQuery query) {
         MatchParticipant matchParticipant = matchParticipantRepository
                 .findById(UUID.fromString(query.id()))
-                .orElseThrow(() -> new RuntimeException("MatchPariticpant not found"));
+                .orElseThrow(() -> new RuntimeException("MatchParticipant not found with id: " + query.id()));
 
         return new GetMatchParticipantOutput(
                 matchParticipant.getId().toString(),
                 matchParticipant.getMatchId().toString(),
-                matchParticipant.getUserId().toString());
+                matchParticipant.getUserId().toString()
+        );
     }
 }

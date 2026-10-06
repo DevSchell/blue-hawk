@@ -33,4 +33,7 @@ public class MatchJpaEntity {
     @JdbcTypeCode(Types.CHAR)
     @Column(name = "user_id", nullable = false, length = 36)
     private UUID userId;
+
+    @Column(name = "max_users", nullable = false)
+    private Integer maxUsers;
 }

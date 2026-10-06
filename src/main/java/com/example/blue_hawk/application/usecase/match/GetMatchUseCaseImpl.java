@@ -26,7 +26,8 @@ public class GetMatchUseCaseImpl implements GetMatchUseCase {
         return new GetMatchOutput(
                 match.getId().toString(),
                 match.getBoardgameId().toString(),
-                match.getUserId().toString()
+                match.getUserId().toString(),
+                match.getMaxUsers()
         );
     }
 }

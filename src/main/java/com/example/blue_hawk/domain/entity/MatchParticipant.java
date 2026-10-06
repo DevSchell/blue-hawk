@@ -3,23 +3,22 @@ package com.example.blue_hawk.domain.entity;
 import java.util.UUID;
 
 public class MatchParticipant {
+
     private UUID id;
-    private UUID userId;
     private UUID matchId;
+    private UUID userId;
 
-    public MatchParticipant(String userId, String matchId) {
-        this.userId = UUID.fromString(userId);
+    public MatchParticipant(String matchId, String userId) {
+        this.id = UUID.randomUUID();
         this.matchId = UUID.fromString(matchId);
-        this.id = generateUUID();
+        this.userId = UUID.fromString(userId);
     }
 
-    public MatchParticipant(UUID id, UUID userId, UUID matchId) {
+    public MatchParticipant(UUID id, UUID matchId, UUID userId) {
         this.id = id;
-        this.userId = userId;
         this.matchId = matchId;
+        this.userId = userId;
     }
-
-    private UUID generateUUID() { return UUID.randomUUID(); }
 
     public UUID getId() {
         return id;
@@ -29,15 +28,19 @@ public class MatchParticipant {
         this.id = id;
     }
 
+    public UUID getMatchId() {
+        return matchId;
+    }
+
+    public void setMatchId(UUID matchId) {
+        this.matchId = matchId;
+    }
+
     public UUID getUserId() {
         return userId;
     }
 
-    public void setUserId(UUID _userId) {
-        this.userId = _userId;
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
-
-    public UUID getMatchId() { return matchId;}
-
-    public void setMatchId(UUID matchId) { this.matchId = matchId;}
 }

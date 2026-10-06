@@ -29,7 +29,8 @@ public class ListMatchUseCaseImpl implements ListMatchUseCase {
                 .map(m -> new ListMatchOutput(
                         m.getId().toString(),
                         m.getBoardgameId().toString(),
-                        m.getUserId().toString()))
+                        m.getUserId().toString(),
+                        m.getMaxUsers()))
                 .toList();
     }
 }

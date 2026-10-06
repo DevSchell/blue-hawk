@@ -4,5 +4,4 @@ public record ListMatchParticipantOutput(
         String id,
         String matchId,
         String userId
-) {
-}
+) {}

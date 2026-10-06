@@ -15,7 +15,9 @@ public class MatchParticipantRepositoryImpl implements IMatchParticipantReposito
 
     private final MatchParticipantJpaRepository jpaRepository;
 
-    public MatchParticipantRepositoryImpl(MatchParticipantJpaRepository jpaRepository) { this.jpaRepository = jpaRepository;}
+    public MatchParticipantRepositoryImpl(MatchParticipantJpaRepository jpaRepository) {
+        this.jpaRepository = jpaRepository;
+    }
 
     @Override
     public MatchParticipant save(MatchParticipant matchParticipant) {
@@ -25,27 +27,25 @@ public class MatchParticipantRepositoryImpl implements IMatchParticipantReposito
     }
 
     @Override
-    public Optional<MatchParticipant> findById(UUID matchParticipantId) {
-        return jpaRepository.findById(matchParticipantId)
-                .map(this::toDomain);
+    public Optional<MatchParticipant> findById(UUID id) {
+        return jpaRepository.findById(id).map(this::toDomain);
     }
 
     @Override
-    public Page<MatchParticipant> findAll(UUID userId, UUID matchId, int page, int size) {
+    public Page<MatchParticipant> findAll(UUID matchId, UUID userId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return jpaRepository.findAllFiltered(matchId, userId, pageable)
                 .map(this::toDomain);
     }
 
     @Override
-    public void deleteById(String matchParticipantId) { jpaRepository.deleteById(UUID.fromString(matchParticipantId));}
+    public void deleteById(UUID id) {
+        jpaRepository.deleteById(id);
+    }
 
     @Override
-    public boolean existsById(MatchParticipant matchParticipant) {
-        if (matchParticipant == null || matchParticipant.getId() == null) {
-            return false;
-        }
-        return jpaRepository.existsById(matchParticipant.getId());
+    public boolean existsById(UUID id) {
+        return jpaRepository.existsById(id);
     }
 
     private MatchParticipantJpaEntity toJpaEntity(MatchParticipant domain) {
@@ -59,9 +59,8 @@ public class MatchParticipantRepositoryImpl implements IMatchParticipantReposito
     private MatchParticipant toDomain(MatchParticipantJpaEntity entity) {
         return new MatchParticipant(
                 entity.getId(),
-                entity.getUserId(),
-                entity.getMatchId()
+                entity.getMatchId(),
+                entity.getUserId()
         );
     }
-
 }

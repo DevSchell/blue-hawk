@@ -52,7 +52,8 @@ public class MatchRepositoryImpl implements IMatchRepository {
         return new MatchJpaEntity(
                 domain.getId(),
                 domain.getBoardgameId(),
-                domain.getUserId()
+                domain.getUserId(),
+                domain.getMaxUsers()
         );
     }
 
@@ -60,7 +61,8 @@ public class MatchRepositoryImpl implements IMatchRepository {
         return new Match(
                 entity.getId(),
                 entity.getBoardgameId(),
-                entity.getUserId()
+                entity.getUserId(),
+                entity.getMaxUsers()
         );
     }
 }

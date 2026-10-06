@@ -25,13 +25,15 @@ public class UpdateMatchUseCaseImpl implements UpdateMatchUseCase {
 
         match.setBoardgameId(UUID.fromString(command.boardgameId()));
         match.setUserId(UUID.fromString(command.userId()));
+        match.setMaxUsers(command.maxUsers());
 
         Match updated = matchRepository.save(match);
 
         return new UpdateMatchOutput(
                 updated.getId().toString(),
                 updated.getBoardgameId().toString(),
-                updated.getUserId().toString()
+                updated.getUserId().toString(),
+                updated.getMaxUsers()
         );
     }
 }

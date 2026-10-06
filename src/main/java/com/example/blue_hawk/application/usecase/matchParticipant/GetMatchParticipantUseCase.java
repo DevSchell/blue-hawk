@@ -4,6 +4,5 @@ import com.example.blue_hawk.application.dto.matchParticipant.GetMatchParticipan
 import com.example.blue_hawk.application.dto.matchParticipant.GetMatchParticipantQuery;
 
 public interface GetMatchParticipantUseCase {
-
     GetMatchParticipantOutput handle(GetMatchParticipantQuery query);
 }

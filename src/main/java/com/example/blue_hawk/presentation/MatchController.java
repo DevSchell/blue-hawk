@@ -54,7 +54,8 @@ public class MatchController {
     public ResponseEntity<MatchResponse> create(@RequestBody MatchRequest request) {
         CreateMatchCommand command = new CreateMatchCommand(
                 request.boardgameId(),
-                request.userId()
+                request.userId(),
+                request.maxUsers()
         );
         CreateMatchOutput output = createMatchUseCase.handle(command);
         return ResponseEntity.status(HttpStatus.CREATED).body(toResponse(output));
@@ -78,7 +79,7 @@ public class MatchController {
         List<ListMatchOutput> output = listMatchUseCase.handle(query);
 
         List<MatchResponse> response = output.stream()
-                .map(o -> new MatchResponse(o.id(), o.boardgameId(), o.userId()))
+                .map(o -> new MatchResponse(o.id(), o.boardgameId(), o.userId(), o.maxUsers()))
                 .toList();
 
         return ResponseEntity.ok(response);
@@ -92,7 +93,8 @@ public class MatchController {
         UpdateMatchCommand command = new UpdateMatchCommand(
                 uuid,
                 request.boardgameId(),
-                request.userId()
+                request.userId(),
+                request.maxUsers()
         );
         UpdateMatchOutput output = updateMatchUseCase.handle(command);
         return ResponseEntity.ok(toResponse(output));
@@ -107,14 +109,14 @@ public class MatchController {
     // ── helpers ──────────────────────────────────────────────────────────────
 
     private MatchResponse toResponse(CreateMatchOutput o) {
-        return new MatchResponse(o.id(), o.boardgameId(), o.userId());
+        return new MatchResponse(o.id(), o.boardgameId(), o.userId(), o.maxUsers());
     }
 
     private MatchResponse toResponse(GetMatchOutput o) {
-        return new MatchResponse(o.id(), o.boardgameId(), o.userId());
+        return new MatchResponse(o.id(), o.boardgameId(), o.userId(), o.maxUsers());
     }
 
     private MatchResponse toResponse(UpdateMatchOutput o) {
-        return new MatchResponse(o.id(), o.boardgameId(), o.userId());
+        return new MatchResponse(o.id(), o.boardgameId(), o.userId(), o.maxUsers());
     }
 }
