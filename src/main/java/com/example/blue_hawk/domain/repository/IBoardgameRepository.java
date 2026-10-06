@@ -14,6 +14,4 @@ public interface IBoardgameRepository {
     Page<Boardgame> findAll(String name, int page, int size);
 
     void deleteById(String boardgameId);
-
-    boolean existsById(Boardgame boardgame);
 }
