@@ -40,8 +40,8 @@ public class UserBoardgameRepositoryImpl implements IUserBoardGameRepository {
     }
 
     @Override
-    public void deleteById(String userBoardgameId) {
-        jpaRepository.deleteById(UUID.fromString(userBoardgameId));
+    public void deleteById(UUID userBoardgameId) {
+        jpaRepository.deleteById(userBoardgameId);
     }
 
     @Override
