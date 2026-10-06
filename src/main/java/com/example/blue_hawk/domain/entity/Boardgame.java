@@ -7,8 +7,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Boardgame {
     private UUID id;
     private String name;
@@ -16,4 +14,22 @@ public class Boardgame {
     private int releaseYear;
     private String playerNumber;
     private int playTime;
+
+    public Boardgame(String name, String description, int releaseYear, String playerNumber, int playTime) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.description = description;
+        this.releaseYear = releaseYear;
+        this.playerNumber = playerNumber;
+        this.playTime = playTime;
+    }
+
+    public Boardgame(UUID id, String name, String description, int releaseYear, String playerNumber, int playTime) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.releaseYear = releaseYear;
+        this.playerNumber = playerNumber;
+        this.playTime = playTime;
+    }
 }
