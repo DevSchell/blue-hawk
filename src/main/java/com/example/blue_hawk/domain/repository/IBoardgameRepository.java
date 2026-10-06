@@ -1,6 +1,6 @@
 package com.example.blue_hawk.domain.repository;
 
-import com.example.blue_hawk.domain.entity.Boardgame;
+import com.example.blue_hawk.domain.entity.boardgame.Boardgame;
 import org.springframework.data.domain.Page;
 
 import java.util.Optional;

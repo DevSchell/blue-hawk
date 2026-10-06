@@ -7,20 +7,18 @@ public class Publisher {
     private String name;
     private int country;
 
+    public Publisher() {}
+
     public Publisher(String name, int country) {
+        this.id = UUID.randomUUID();
         this.name = name;
         this.country = country;
-        this.id = generateUUID();
     }
 
     public Publisher(UUID id, String name, int country) {
         this.id = id;
         this.name = name;
         this.country = country;
-    }
-
-    private UUID generateUUID() {
-        return UUID.randomUUID();
     }
 
     public UUID getId() {
