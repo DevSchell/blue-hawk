@@ -7,13 +7,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface IMatchRepository {
+
     Match save(Match match);
 
-    Optional<Match> findById(UUID matchId);
+    Optional<Match> findById(UUID id);
 
-    Page<Match> findAll(UUID boardgameId, int page, int size);
+    Page<Match> findAll(UUID boardgameId, UUID userId, int page, int size);
 
-    void deleteById(String matchId);
+    void deleteById(UUID id);
 
-    boolean existsById(Match match);
+    boolean existsById(UUID id);
 }

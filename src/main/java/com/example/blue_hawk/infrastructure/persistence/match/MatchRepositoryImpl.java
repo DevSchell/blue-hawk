@@ -24,46 +24,43 @@ public class MatchRepositoryImpl implements IMatchRepository {
         MatchJpaEntity jpaEntity = toJpaEntity(match);
         MatchJpaEntity saved = jpaRepository.save(jpaEntity);
         return toDomain(saved);
-
     }
 
     @Override
-    public Optional<Match> findById(UUID matchId) {
-        return jpaRepository.findById(matchId)
+    public Optional<Match> findById(UUID id) {
+        return jpaRepository.findById(id).map(this::toDomain);
+    }
+
+    @Override
+    public Page<Match> findAll(UUID boardgameId, UUID userId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return jpaRepository.findAllFiltered(boardgameId, userId, pageable)
                 .map(this::toDomain);
     }
 
     @Override
-    public Page<Match> findAll( UUID boardgameId, int page, int size) {
-        Pageable pageable = PageRequest.of(page,size);
-        return jpaRepository.findAllFiltered(boardgameId, pageable)
-                .map(this::toDomain);
+    public void deleteById(UUID id) {
+        jpaRepository.deleteById(id);
     }
 
     @Override
-    public void deleteById(String matchId) {
-        jpaRepository.deleteById(UUID.fromString(matchId));
-    }
-
-    @Override
-    public boolean existsById(Match match) {
-        if (match == null || match.getId() == null) {
-            return false;
-        }
-        return jpaRepository.existsById(match.getId());
+    public boolean existsById(UUID id) {
+        return jpaRepository.existsById(id);
     }
 
     private MatchJpaEntity toJpaEntity(Match domain) {
         return new MatchJpaEntity(
                 domain.getId(),
-                domain.getBoardgameId()
+                domain.getBoardgameId(),
+                domain.getUserId()
         );
     }
 
     private Match toDomain(MatchJpaEntity entity) {
         return new Match(
                 entity.getId(),
-                entity.getBoardgameId()
+                entity.getBoardgameId(),
+                entity.getUserId()
         );
     }
 }

@@ -6,9 +6,9 @@ import com.example.blue_hawk.domain.entity.Match;
 import com.example.blue_hawk.domain.repository.IMatchRepository;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class CreateMatchUseCaseImpl implements CreateMatchUseCase {
+
     private final IMatchRepository matchRepository;
 
     public CreateMatchUseCaseImpl(IMatchRepository matchRepository) {
@@ -17,11 +17,17 @@ public class CreateMatchUseCaseImpl implements CreateMatchUseCase {
 
     @Override
     public CreateMatchOutput handle(CreateMatchCommand command) {
-        Match match = new Match(command.boardgameId());
+        Match match = new Match(
+                command.boardgameId(),
+                command.userId()
+        );
 
-        Match savedMatch = matchRepository.save(match);
+        Match saved = matchRepository.save(match);
 
-        return new CreateMatchOutput(savedMatch.getId().toString(),savedMatch.getBoardgameId().toString());
+        return new CreateMatchOutput(
+                saved.getId().toString(),
+                saved.getBoardgameId().toString(),
+                saved.getUserId().toString()
+        );
     }
-
 }

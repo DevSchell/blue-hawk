@@ -1,6 +1,5 @@
 package com.example.blue_hawk.infrastructure.persistence.match;
 
-import com.example.blue_hawk.infrastructure.persistence.userBoardgame.UserBoardgameJpaEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,8 +12,11 @@ import java.util.UUID;
 @Repository
 public interface MatchJpaRepository extends JpaRepository<MatchJpaEntity, UUID> {
 
-    @Query("SELECT u FROM MatchJpaEntity u WHERE" +
-            "(:boardgameId IS NULL OR u.boardgameId = :boardgameId)")
-    Page<MatchJpaEntity> findAllFiltered(@Param("boardgameId") UUID boardgameId,
-                                                 Pageable pageable);
+    @Query("SELECT m FROM MatchJpaEntity m WHERE " +
+           "(:boardgameId IS NULL OR m.boardgameId = :boardgameId) AND " +
+           "(:userId IS NULL OR m.userId = :userId)")
+    Page<MatchJpaEntity> findAllFiltered(
+            @Param("boardgameId") UUID boardgameId,
+            @Param("userId") UUID userId,
+            Pageable pageable);
 }

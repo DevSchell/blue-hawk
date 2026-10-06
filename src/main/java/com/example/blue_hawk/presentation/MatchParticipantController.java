@@ -70,7 +70,7 @@ public class MatchParticipantController {
             @RequestParam(name = "size", defaultValue = "10") Integer size) {
 
         ListMatchParticipantQuery query = new ListMatchParticipantQuery(userId, matchId, page, size);
-        List<ListMatchParticipantOutput> output = ListMatchParticipantUseCase.handle(query);
+        List<ListMatchParticipantOutput> output = listMatchParticipantUseCase.handle(query);
 
         List<MatchParticipantResponse> response = output.stream()
                 .map(item -> new MatchParticipantResponse(item.id(), item.matchId(), item.userId()))

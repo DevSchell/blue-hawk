@@ -2,5 +2,6 @@ package com.example.blue_hawk.presentation;
 
 public record MatchResponse(
         String id,
-        String boardgameId) {
-}
+        String boardgameId,
+        String userId
+) {}

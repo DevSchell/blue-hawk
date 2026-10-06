@@ -5,21 +5,15 @@ import com.example.blue_hawk.application.dto.match.CreateMatchOutput;
 import com.example.blue_hawk.application.dto.match.DeleteMatchCommand;
 import com.example.blue_hawk.application.dto.match.GetMatchOutput;
 import com.example.blue_hawk.application.dto.match.GetMatchQuery;
-import com.example.blue_hawk.application.dto.match.ListMatchQuery;
 import com.example.blue_hawk.application.dto.match.ListMatchOutput;
+import com.example.blue_hawk.application.dto.match.ListMatchQuery;
 import com.example.blue_hawk.application.dto.match.UpdateMatchCommand;
 import com.example.blue_hawk.application.dto.match.UpdateMatchOutput;
-import com.example.blue_hawk.application.dto.match.GetMatchQuery;
-import com.example.blue_hawk.application.dto.match.ListMatchOutput;
-import com.example.blue_hawk.application.dto.match.ListMatchQuery;
-import com.example.blue_hawk.application.dto.match.UpdateMatchCommand;
 import com.example.blue_hawk.application.usecase.match.CreateMatchUseCase;
 import com.example.blue_hawk.application.usecase.match.DeleteMatchUseCase;
 import com.example.blue_hawk.application.usecase.match.GetMatchUseCase;
 import com.example.blue_hawk.application.usecase.match.ListMatchUseCase;
 import com.example.blue_hawk.application.usecase.match.UpdateMatchUseCase;
-import com.example.blue_hawk.application.usecase.match.GetMatchUseCase;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,8 +30,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/matches")
-
-
 public class MatchController {
 
     private final CreateMatchUseCase createMatchUseCase;
@@ -55,12 +47,14 @@ public class MatchController {
         this.getMatchUseCase = getMatchUseCase;
         this.listMatchUseCase = listMatchUseCase;
         this.updateMatchUseCase = updateMatchUseCase;
-        this.deleteMatchUseCase = deleteMatchUseCase;}
+        this.deleteMatchUseCase = deleteMatchUseCase;
+    }
 
     @PostMapping
     public ResponseEntity<MatchResponse> create(@RequestBody MatchRequest request) {
         CreateMatchCommand command = new CreateMatchCommand(
-                request.boardgameId()
+                request.boardgameId(),
+                request.userId()
         );
         CreateMatchOutput output = createMatchUseCase.handle(command);
         return ResponseEntity.status(HttpStatus.CREATED).body(toResponse(output));
@@ -74,16 +68,17 @@ public class MatchController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MatchResponse>> List(
+    public ResponseEntity<List<MatchResponse>> list(
             @RequestParam(name = "boardgameId", required = false) String boardgameId,
+            @RequestParam(name = "userId", required = false) String userId,
             @RequestParam(name = "page", defaultValue = "0") Integer page,
-            @RequestParam(name = "size", defaultValue =  "10") Integer size) {
+            @RequestParam(name = "size", defaultValue = "10") Integer size) {
 
-        ListMatchQuery query = new ListMatchQuery(boardgameId, page, size);
-        List<ListMatchOutput> output = ListMatchUseCase.handle(query);
+        ListMatchQuery query = new ListMatchQuery(boardgameId, userId, page, size);
+        List<ListMatchOutput> output = listMatchUseCase.handle(query);
 
         List<MatchResponse> response = output.stream()
-                .map(o -> new MatchResponse(o.id(), o.boardgameId()))
+                .map(o -> new MatchResponse(o.id(), o.boardgameId(), o.userId()))
                 .toList();
 
         return ResponseEntity.ok(response);
@@ -96,12 +91,12 @@ public class MatchController {
 
         UpdateMatchCommand command = new UpdateMatchCommand(
                 uuid,
-                request.boardgameId()
+                request.boardgameId(),
+                request.userId()
         );
         UpdateMatchOutput output = updateMatchUseCase.handle(command);
         return ResponseEntity.ok(toResponse(output));
     }
-
 
     @DeleteMapping("/{uuid}")
     public ResponseEntity<Void> delete(@PathVariable("uuid") String uuid) {
@@ -111,18 +106,15 @@ public class MatchController {
 
     // ── helpers ──────────────────────────────────────────────────────────────
 
-
     private MatchResponse toResponse(CreateMatchOutput o) {
-        return new MatchResponse(o.id(), o.boardgameId());
+        return new MatchResponse(o.id(), o.boardgameId(), o.userId());
     }
 
     private MatchResponse toResponse(GetMatchOutput o) {
-        return new MatchResponse(o.id(), o.boardgameId());
+        return new MatchResponse(o.id(), o.boardgameId(), o.userId());
     }
 
     private MatchResponse toResponse(UpdateMatchOutput o) {
-        return new MatchResponse(o.id(), o.boardgameId());
+        return new MatchResponse(o.id(), o.boardgameId(), o.userId());
     }
-
-
 }

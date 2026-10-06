@@ -32,7 +32,7 @@ public class OfferJpaEntity {
     private UUID id;
 
     @JdbcTypeCode(Types.CHAR)
-    @Column(name = "user_board_game_id", nullable = false, length = 36)
+    @Column(name = "userboardgame_id", nullable = false, length = 36)
     private UUID userBoardgameId;
 
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
