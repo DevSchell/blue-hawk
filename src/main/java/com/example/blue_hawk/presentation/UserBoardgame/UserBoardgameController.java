@@ -1,4 +1,4 @@
-package com.example.blue_hawk.presentation;
+package com.example.blue_hawk.presentation.UserBoardgame;
 
 import com.example.blue_hawk.application.dto.userboardgame.CreateUserBoardgameCommand;
 import com.example.blue_hawk.application.dto.userboardgame.CreateUserBoardgameOutput;
@@ -14,6 +14,8 @@ import com.example.blue_hawk.application.usecase.userboardgame.DeleteUserBoardga
 import com.example.blue_hawk.application.usecase.userboardgame.GetUserBoardgameUseCase;
 import com.example.blue_hawk.application.usecase.userboardgame.ListUserBoardgameUseCase;
 import com.example.blue_hawk.application.usecase.userboardgame.UpdateUserBoardgameUseCase;
+import com.example.blue_hawk.presentation.UserBoardgame.dto.UserBoardgameRequest;
+import com.example.blue_hawk.presentation.UserBoardgame.dto.UserBoardgameResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

@@ -1,7 +1,7 @@
 package com.example.blue_hawk.infrastructure.persistence.offer;
 
-import com.example.blue_hawk.domain.entity.Offer;
-import com.example.blue_hawk.domain.entity.OfferStatus;
+import com.example.blue_hawk.domain.entity.offer.Offer;
+import com.example.blue_hawk.domain.entity.offer.OfferStatus;
 import com.example.blue_hawk.domain.repository.IOfferRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

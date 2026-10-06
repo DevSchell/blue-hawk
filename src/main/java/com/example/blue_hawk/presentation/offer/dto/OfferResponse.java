@@ -1,4 +1,4 @@
-package com.example.blue_hawk.presentation;
+package com.example.blue_hawk.presentation.offer.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

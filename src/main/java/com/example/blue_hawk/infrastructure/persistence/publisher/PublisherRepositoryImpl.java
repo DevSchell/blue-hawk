@@ -1,6 +1,6 @@
 package com.example.blue_hawk.infrastructure.persistence.publisher;
 
-import com.example.blue_hawk.domain.entity.Publisher;
+import com.example.blue_hawk.domain.entity.publisher.Publisher;
 import com.example.blue_hawk.domain.repository.IPublisherRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

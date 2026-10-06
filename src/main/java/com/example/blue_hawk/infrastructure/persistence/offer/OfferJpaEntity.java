@@ -1,6 +1,6 @@
 package com.example.blue_hawk.infrastructure.persistence.offer;
 
-import com.example.blue_hawk.domain.entity.OfferStatus;
+import com.example.blue_hawk.domain.entity.offer.OfferStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
