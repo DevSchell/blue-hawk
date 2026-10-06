@@ -1,4 +1,4 @@
-package com.example.blue_hawk.domain.entity;
+package com.example.blue_hawk.domain.entity.userboardgame;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,6 +34,12 @@ public class UserBoardgame {
         this.userId = UUID.fromString(userId);
         this.boardgameId = UUID.fromString(boardgameId);
         this.id = generateUUID();
+    }
+
+    public UserBoardgame(UUID id, UUID userId, UUID boardgameId) {
+        this.id = id;
+        this.userId = userId;
+        this.boardgameId = boardgameId;
     }
 
     private UUID generateUUID() {
