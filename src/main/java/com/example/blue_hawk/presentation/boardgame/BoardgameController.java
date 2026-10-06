@@ -1,4 +1,4 @@
-package com.example.blue_hawk.presentation;
+package com.example.blue_hawk.presentation.boardgame;
 
 import com.example.blue_hawk.application.dto.boardgame.CreateBoardgameCommand;
 import com.example.blue_hawk.application.dto.boardgame.CreateBoardgameOutput;

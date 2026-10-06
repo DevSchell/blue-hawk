@@ -2,7 +2,7 @@ package com.example.blue_hawk.application.usecase.matchParticipant;
 
 import com.example.blue_hawk.application.dto.matchParticipant.GetMatchParticipantOutput;
 import com.example.blue_hawk.application.dto.matchParticipant.GetMatchParticipantQuery;
-import com.example.blue_hawk.domain.entity.MatchParticipant;
+import com.example.blue_hawk.domain.entity.matchparticipant.MatchParticipant;
 import com.example.blue_hawk.domain.repository.IMatchParticipantRepository;
 import org.springframework.stereotype.Service;
 
