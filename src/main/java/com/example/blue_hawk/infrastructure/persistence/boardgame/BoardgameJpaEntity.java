@@ -4,6 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Converter;
+import jakarta.persistence.AttributeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,9 +15,11 @@ import org.hibernate.annotations.JdbcTypeCode;
 
 import java.sql.Types;
 import java.util.UUID;
+import java.time.LocalDate;
+import java.sql.Date;
 
 @Entity
-@Table(name = "boardgame")
+@Table(name = "board_game")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,17 +38,44 @@ public class BoardgameJpaEntity {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @JdbcTypeCode(Types.INTEGER)
-    @Column(name = "release_year")
+    @Convert(converter = YearDateConverter.class)
+    @Column(name = "release_date")
     private int releaseYear;
 
-
-    @JdbcTypeCode(Types.CHAR)
+    @Convert(converter = StringIntConverter.class)
     @Column(name = "player_number")
     private String playerNumber;
 
-
     @JdbcTypeCode(Types.INTEGER)
-    @Column(name = "play_time")
+    @Column(name = "gameplay_time")
     private int playTime;
+
+    @Converter
+    public static class YearDateConverter implements AttributeConverter<Integer, Date> {
+        @Override
+        public Date convertToDatabaseColumn(Integer year) {
+            if (year == null || year == 0) return Date.valueOf(LocalDate.now());
+            return Date.valueOf(LocalDate.of(year, 1, 1));
+        }
+
+        @Override
+        public Integer convertToEntityAttribute(Date dbData) {
+            if (dbData == null) return null;
+            return dbData.toLocalDate().getYear();
+        }
+    }
+
+    @Converter
+    public static class StringIntConverter implements AttributeConverter<String, Integer> {
+        @Override
+        public Integer convertToDatabaseColumn(String attribute) {
+            if (attribute == null) return null;
+            try { return Integer.parseInt(attribute); } catch (NumberFormatException e) { return 0; }
+        }
+
+        @Override
+        public String convertToEntityAttribute(Integer dbData) {
+            return dbData == null ? null : String.valueOf(dbData);
+        }
+    }
 }

@@ -15,7 +15,7 @@ import java.util.UUID;
 
 // Crases preservam a caixa do nome "User" (MySQL em Linux diferencia maiúsculas em nomes de tabela).
 @Entity
-@Table(name = "`User`")
+@Table(name = "`user`")
 public class UserEntity {
 
     // A migration define id como CHAR(36); sem isso o Hibernate usaria BINARY(16).
