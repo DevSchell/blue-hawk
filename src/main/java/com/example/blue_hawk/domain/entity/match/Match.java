@@ -1,4 +1,4 @@
-package com.example.blue_hawk.domain.entity;
+package com.example.blue_hawk.domain.entity.match;
 
 import java.util.UUID;
 

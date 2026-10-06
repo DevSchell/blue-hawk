@@ -1,4 +1,4 @@
-package com.example.blue_hawk.presentation;
+package com.example.blue_hawk.presentation.match;
 
 import com.example.blue_hawk.application.dto.match.CreateMatchCommand;
 import com.example.blue_hawk.application.dto.match.CreateMatchOutput;
@@ -14,6 +14,8 @@ import com.example.blue_hawk.application.usecase.match.DeleteMatchUseCase;
 import com.example.blue_hawk.application.usecase.match.GetMatchUseCase;
 import com.example.blue_hawk.application.usecase.match.ListMatchUseCase;
 import com.example.blue_hawk.application.usecase.match.UpdateMatchUseCase;
+import com.example.blue_hawk.presentation.match.dto.MatchRequest;
+import com.example.blue_hawk.presentation.match.dto.MatchResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
