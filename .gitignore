@@ -23,10 +23,10 @@ bin/
 build/
 
 # Database & Credenciais (SENSÍVEL!)
-# Removido application.properties do ignore, pois está usando variáveis de ambiente
-application-prod.properties
-application-dev.properties
-application-secret.properties
+application.properties
+src/main/resources/application.properties
+application-*.properties
+!src/main/resources/application-example.properties
 
 # Environment variables
 .env
