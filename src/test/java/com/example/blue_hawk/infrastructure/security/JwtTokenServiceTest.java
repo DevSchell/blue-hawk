@@ -1,7 +1,7 @@
 package com.example.blue_hawk.infrastructure.security;
 
-import com.example.blue_hawk.domain.entity.User;
-import com.example.blue_hawk.domain.entity.UserRole;
+import com.example.blue_hawk.domain.entity.user.User;
+import com.example.blue_hawk.domain.entity.user.UserRole;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
