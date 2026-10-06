@@ -1,7 +1,7 @@
 package com.example.blue_hawk.application.usecase.user;
 
 import com.example.blue_hawk.application.dto.user.ChangeUserPasswordCommand;
-import com.example.blue_hawk.domain.entity.User;
+import com.example.blue_hawk.domain.entity.user.User;
 import com.example.blue_hawk.domain.repository.IUserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;

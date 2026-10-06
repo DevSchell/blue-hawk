@@ -1,4 +1,4 @@
-package com.example.blue_hawk.domain.entity;
+package com.example.blue_hawk.domain.entity.user;
 
 import java.util.Locale;
 import java.util.UUID;

@@ -1,7 +1,7 @@
-package com.example.blue_hawk.infrastructure.persistence;
+package com.example.blue_hawk.infrastructure.persistence.user;
 
-import com.example.blue_hawk.domain.entity.User;
-import com.example.blue_hawk.domain.entity.UserRole;
+import com.example.blue_hawk.domain.entity.user.User;
+import com.example.blue_hawk.domain.entity.user.UserRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

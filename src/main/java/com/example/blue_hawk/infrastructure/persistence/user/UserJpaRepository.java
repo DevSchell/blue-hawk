@@ -1,4 +1,4 @@
-package com.example.blue_hawk.infrastructure.persistence;
+package com.example.blue_hawk.infrastructure.persistence.user;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

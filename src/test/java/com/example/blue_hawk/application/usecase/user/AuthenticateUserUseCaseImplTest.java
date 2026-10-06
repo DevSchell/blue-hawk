@@ -2,8 +2,8 @@ package com.example.blue_hawk.application.usecase.user;
 
 import com.example.blue_hawk.application.dto.user.AuthenticateUserCommand;
 import com.example.blue_hawk.application.dto.user.AuthenticateUserOutput;
-import com.example.blue_hawk.domain.entity.User;
-import com.example.blue_hawk.domain.entity.UserRole;
+import com.example.blue_hawk.domain.entity.user.User;
+import com.example.blue_hawk.domain.entity.user.UserRole;
 import com.example.blue_hawk.domain.repository.IUserRepository;
 import com.example.blue_hawk.infrastructure.security.JwtTokenService;
 import org.junit.jupiter.api.Test;

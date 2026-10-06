@@ -1,6 +1,6 @@
 package com.example.blue_hawk.infrastructure.security;
 
-import com.example.blue_hawk.domain.entity.User;
+import com.example.blue_hawk.domain.entity.user.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;

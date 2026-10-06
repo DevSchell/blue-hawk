@@ -1,4 +1,4 @@
-package com.example.blue_hawk.infrastructure.web.controller;
+package com.example.blue_hawk.presentation.user;
 
 import com.example.blue_hawk.application.dto.user.AuthenticateUserCommand;
 import com.example.blue_hawk.application.dto.user.AuthenticateUserOutput;

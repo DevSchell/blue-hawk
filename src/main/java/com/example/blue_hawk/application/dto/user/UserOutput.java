@@ -1,6 +1,6 @@
 package com.example.blue_hawk.application.dto.user;
 
-import com.example.blue_hawk.domain.entity.User;
+import com.example.blue_hawk.domain.entity.user.User;
 
 public record UserOutput(
         String id,

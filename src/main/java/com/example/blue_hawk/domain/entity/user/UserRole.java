@@ -1,4 +1,4 @@
-package com.example.blue_hawk.domain.entity;
+package com.example.blue_hawk.domain.entity.user;
 
 /**
  * Papéis do usuário. Persistido como inteiro (coluna {@code role int} da tabela {@code User}),

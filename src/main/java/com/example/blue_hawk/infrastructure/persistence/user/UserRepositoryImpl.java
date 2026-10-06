@@ -1,6 +1,6 @@
-package com.example.blue_hawk.infrastructure.persistence;
+package com.example.blue_hawk.infrastructure.persistence.user;
 
-import com.example.blue_hawk.domain.entity.User;
+import com.example.blue_hawk.domain.entity.user.User;
 import com.example.blue_hawk.domain.repository.IUserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
