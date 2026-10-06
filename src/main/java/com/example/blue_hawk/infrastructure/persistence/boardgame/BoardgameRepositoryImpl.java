@@ -47,14 +47,6 @@ public class BoardgameRepositoryImpl implements IBoardgameRepository {
         boardgameJpaRepository.deleteById(UUID.fromString(boardgameId));
     }
 
-    @Override
-    public boolean existsById(Boardgame boardgame) {
-        if (boardgame == null || boardgame.getId() == null) {
-            return false;
-        }
-        return boardgameJpaRepository.existsById(boardgame.getId());
-    }
-
     private BoardgameJpaEntity toJpaEntity(Boardgame domain) {
         return new BoardgameJpaEntity(
                 domain.getId(),
