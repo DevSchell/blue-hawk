@@ -6,6 +6,8 @@ import com.example.blue_hawk.domain.repository.IUserBoardGameRepository;
 
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class DeleteUserBoardgameUseCaseImpl implements DeleteUserBoardgameUseCase {
 
@@ -17,7 +19,7 @@ public class DeleteUserBoardgameUseCaseImpl implements DeleteUserBoardgameUseCas
 
     @Override
     public DeleteUserBoardgameOutput handle(DeleteUserBoardgameCommand command) {
-        userBoardGameRepository.deleteById(command.id());
+        userBoardGameRepository.deleteById(UUID.fromString(command.id()));
 
         return new DeleteUserBoardgameOutput(command.id());
     }

@@ -1,5 +1,3 @@
-
-
 -- tables
 -- Table: board_game
 CREATE TABLE board_game (

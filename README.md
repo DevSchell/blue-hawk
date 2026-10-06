@@ -44,20 +44,43 @@ desktop/web.
 - Apache Maven instalado (`mvn` disponível no terminal)
 - PostgreSQL instalado/rodando e acessível
 
-### ⚙️ Configuração e execução
+### ⚙️ Configuração e execução (application.properties)
 
-O backend usa PostgreSQL. Configure as variáveis no arquivo `.env` (ele não deve ser commitado):
+Configurações sensíveis e detalhes do banco de dados não são mantidos no repositório. Você precisa configurar o arquivo localmente.
 
-```dotenv
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=postgres
-DB_USERNAME=postgres
-DB_PASSWORD=sua_senha
+1. Navegue até o diretório `src/main/resources/`.
+2. Crie um arquivo chamado `application.properties` (que é ignorado pelo Git).
+3. Adicione o seguinte conteúdo base e ajuste de acordo com as configurações em sua máquina:
+
+```properties
+spring.application.name=blue-hawk
+
+# Configurações do PostgreSQL
+spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
+spring.datasource.username=postgres
+spring.datasource.password=sua_senha_aqui
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# JPA / Hibernate
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+
+# Flyway
+spring.flyway.enabled=true
+spring.flyway.locations=classpath:db/migration
+
+# Desabilita a conversão de CamelCase para snake_case
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+# ProblemDetails
+spring.mvc.problemdetails.enabled=true
+
+# JWT Secreto (apenas exemplo para dev local, 32+ caracteres)
+security.jwt.secret=9a3f4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a
+security.jwt.expiration-seconds=86400
 ```
 
-Configure as variáveis de conexão PostgreSQL no ambiente antes de abrir o terminal. O Spring Boot não carrega `.env`
-automaticamente. Na raiz do repositório, inicie o backend com o comando Maven:
+Com o banco de dados rodando e o arquivo configurado, na raiz do repositório inicie o backend usando o comando Maven:
 
 ```bash
 mvn spring-boot:run
