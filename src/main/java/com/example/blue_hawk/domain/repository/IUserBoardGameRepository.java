@@ -1,9 +1,8 @@
 package com.example.blue_hawk.domain.repository;
 
-import com.example.blue_hawk.domain.entity.UserBoardgame;
+import com.example.blue_hawk.domain.entity.userboardgame.UserBoardgame;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

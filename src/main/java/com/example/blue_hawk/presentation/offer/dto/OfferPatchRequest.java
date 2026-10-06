@@ -1,9 +1,8 @@
-package com.example.blue_hawk.presentation;
+package com.example.blue_hawk.presentation.offer.dto;
 
 import java.math.BigDecimal;
 
-public record OfferRequest(
-        String userBoardgameId,
+public record OfferPatchRequest(
         BigDecimal price,
         String status,
         String description

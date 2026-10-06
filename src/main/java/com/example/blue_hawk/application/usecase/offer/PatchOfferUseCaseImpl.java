@@ -2,8 +2,8 @@ package com.example.blue_hawk.application.usecase.offer;
 
 import com.example.blue_hawk.application.dto.offer.PatchOfferCommand;
 import com.example.blue_hawk.application.dto.offer.PatchOfferOutput;
-import com.example.blue_hawk.domain.entity.Offer;
-import com.example.blue_hawk.domain.entity.OfferStatus;
+import com.example.blue_hawk.domain.entity.offer.Offer;
+import com.example.blue_hawk.domain.entity.offer.OfferStatus;
 import com.example.blue_hawk.domain.repository.IOfferRepository;
 import org.springframework.stereotype.Service;
 

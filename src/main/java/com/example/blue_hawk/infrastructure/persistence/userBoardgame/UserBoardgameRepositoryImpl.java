@@ -1,6 +1,6 @@
 package com.example.blue_hawk.infrastructure.persistence.userBoardgame;
 
-import com.example.blue_hawk.domain.entity.UserBoardgame;
+import com.example.blue_hawk.domain.entity.userboardgame.UserBoardgame;
 import com.example.blue_hawk.domain.repository.IUserBoardGameRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

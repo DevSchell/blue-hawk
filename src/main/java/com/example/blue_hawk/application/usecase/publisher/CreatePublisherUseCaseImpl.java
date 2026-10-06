@@ -2,7 +2,7 @@ package com.example.blue_hawk.application.usecase.publisher;
 
 import com.example.blue_hawk.application.dto.publisher.CreatePublisherCommand;
 import com.example.blue_hawk.application.dto.publisher.CreatePublisherOutput;
-import com.example.blue_hawk.domain.entity.Publisher;
+import com.example.blue_hawk.domain.entity.publisher.Publisher;
 import com.example.blue_hawk.domain.repository.IPublisherRepository;
 import org.springframework.stereotype.Service;
 

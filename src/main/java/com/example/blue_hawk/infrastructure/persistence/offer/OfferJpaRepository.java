@@ -1,6 +1,6 @@
 package com.example.blue_hawk.infrastructure.persistence.offer;
 
-import com.example.blue_hawk.domain.entity.OfferStatus;
+import com.example.blue_hawk.domain.entity.offer.OfferStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

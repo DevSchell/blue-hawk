@@ -1,4 +1,4 @@
-package com.example.blue_hawk.presentation;
+package com.example.blue_hawk.presentation.offer;
 
 import com.example.blue_hawk.application.dto.offer.CreateOfferCommand;
 import com.example.blue_hawk.application.dto.offer.CreateOfferOutput;
@@ -17,6 +17,9 @@ import com.example.blue_hawk.application.usecase.offer.GetOfferUseCase;
 import com.example.blue_hawk.application.usecase.offer.ListOfferUseCase;
 import com.example.blue_hawk.application.usecase.offer.PatchOfferUseCase;
 import com.example.blue_hawk.application.usecase.offer.UpdateOfferUseCase;
+import com.example.blue_hawk.presentation.offer.dto.OfferPatchRequest;
+import com.example.blue_hawk.presentation.offer.dto.OfferRequest;
+import com.example.blue_hawk.presentation.offer.dto.OfferResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

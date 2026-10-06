@@ -2,7 +2,7 @@ package com.example.blue_hawk.application.usecase.userboardgame;
 
 import com.example.blue_hawk.application.dto.userboardgame.GetUserBoardgameOutput;
 import com.example.blue_hawk.application.dto.userboardgame.GetUserBoardgameQuery;
-import com.example.blue_hawk.domain.entity.UserBoardgame;
+import com.example.blue_hawk.domain.entity.userboardgame.UserBoardgame;
 import com.example.blue_hawk.domain.repository.IUserBoardGameRepository;
 import org.springframework.stereotype.Service;
 
