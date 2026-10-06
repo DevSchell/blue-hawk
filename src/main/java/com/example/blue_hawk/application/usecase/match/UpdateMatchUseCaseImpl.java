@@ -23,16 +23,14 @@ public class UpdateMatchUseCaseImpl implements UpdateMatchUseCase {
                 .findById(UUID.fromString(command.id()))
                 .orElseThrow(() -> new RuntimeException("Match not found with id: " + command.id()));
 
-        match.setBoardgameId(UUID.fromString(command.boardgameId()));
-        match.setUserId(UUID.fromString(command.userId()));
+        match.setUserBoardgameId(UUID.fromString(command.userBoardgameId()));
         match.setMaxUsers(command.maxUsers());
 
         Match updated = matchRepository.save(match);
 
         return new UpdateMatchOutput(
                 updated.getId().toString(),
-                updated.getBoardgameId().toString(),
-                updated.getUserId().toString(),
+                updated.getUserBoardgameId().toString(),
                 updated.getMaxUsers()
         );
     }

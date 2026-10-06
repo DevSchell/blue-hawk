@@ -13,10 +13,8 @@ import java.util.UUID;
 public interface MatchJpaRepository extends JpaRepository<MatchJpaEntity, UUID> {
 
     @Query("SELECT m FROM MatchJpaEntity m WHERE " +
-           "(:boardgameId IS NULL OR m.boardgameId = :boardgameId) AND " +
-           "(:userId IS NULL OR m.userId = :userId)")
+           "(:userBoardgameId IS NULL OR m.userBoardgameId = :userBoardgameId)")
     Page<MatchJpaEntity> findAllFiltered(
-            @Param("boardgameId") UUID boardgameId,
-            @Param("userId") UUID userId,
+            @Param("userBoardgameId") UUID userBoardgameId,
             Pageable pageable);
 }

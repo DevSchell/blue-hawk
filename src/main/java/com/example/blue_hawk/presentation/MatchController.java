@@ -53,8 +53,7 @@ public class MatchController {
     @PostMapping
     public ResponseEntity<MatchResponse> create(@RequestBody MatchRequest request) {
         CreateMatchCommand command = new CreateMatchCommand(
-                request.boardgameId(),
-                request.userId(),
+                request.userBoardgameId(),
                 request.maxUsers()
         );
         CreateMatchOutput output = createMatchUseCase.handle(command);
@@ -70,16 +69,15 @@ public class MatchController {
 
     @GetMapping
     public ResponseEntity<List<MatchResponse>> list(
-            @RequestParam(name = "boardgameId", required = false) String boardgameId,
-            @RequestParam(name = "userId", required = false) String userId,
+            @RequestParam(name = "userBoardgameId", required = false) String userBoardgameId,
             @RequestParam(name = "page", defaultValue = "0") Integer page,
             @RequestParam(name = "size", defaultValue = "10") Integer size) {
 
-        ListMatchQuery query = new ListMatchQuery(boardgameId, userId, page, size);
+        ListMatchQuery query = new ListMatchQuery(userBoardgameId, page, size);
         List<ListMatchOutput> output = listMatchUseCase.handle(query);
 
         List<MatchResponse> response = output.stream()
-                .map(o -> new MatchResponse(o.id(), o.boardgameId(), o.userId(), o.maxUsers()))
+                .map(o -> new MatchResponse(o.id(), o.userBoardgameId(), o.maxUsers()))
                 .toList();
 
         return ResponseEntity.ok(response);
@@ -92,8 +90,7 @@ public class MatchController {
 
         UpdateMatchCommand command = new UpdateMatchCommand(
                 uuid,
-                request.boardgameId(),
-                request.userId(),
+                request.userBoardgameId(),
                 request.maxUsers()
         );
         UpdateMatchOutput output = updateMatchUseCase.handle(command);
@@ -109,14 +106,14 @@ public class MatchController {
     // ── helpers ──────────────────────────────────────────────────────────────
 
     private MatchResponse toResponse(CreateMatchOutput o) {
-        return new MatchResponse(o.id(), o.boardgameId(), o.userId(), o.maxUsers());
+        return new MatchResponse(o.id(), o.userBoardgameId(), o.maxUsers());
     }
 
     private MatchResponse toResponse(GetMatchOutput o) {
-        return new MatchResponse(o.id(), o.boardgameId(), o.userId(), o.maxUsers());
+        return new MatchResponse(o.id(), o.userBoardgameId(), o.maxUsers());
     }
 
     private MatchResponse toResponse(UpdateMatchOutput o) {
-        return new MatchResponse(o.id(), o.boardgameId(), o.userId(), o.maxUsers());
+        return new MatchResponse(o.id(), o.userBoardgameId(), o.maxUsers());
     }
 }

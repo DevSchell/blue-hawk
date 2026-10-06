@@ -18,10 +18,9 @@ CREATE TABLE board_game (
 
 -- Table: match
 CREATE TABLE match (
-    id            CHAR(36) NOT NULL,
-    user_id       CHAR(36) NOT NULL,
-    board_game_id CHAR(36) NOT NULL,
-    max_users     INT      NOT NULL,
+    id               CHAR(36) NOT NULL,
+    userboardgame_id CHAR(36) NOT NULL,
+    max_users        INT      NOT NULL,
     CONSTRAINT match_pk PRIMARY KEY (id)
 );
 
@@ -106,13 +105,9 @@ ALTER TABLE user_board_game ADD CONSTRAINT board_game_user_board_game FOREIGN KE
 ALTER TABLE user_review ADD CONSTRAINT board_game_user_review FOREIGN KEY (board_game_id)
     REFERENCES board_game (id);
 
--- Reference: match_board_game (table: match)
-ALTER TABLE match ADD CONSTRAINT match_board_game FOREIGN KEY (board_game_id)
-    REFERENCES board_game (id);
-
--- Reference: user_match (table: match)
-ALTER TABLE match ADD CONSTRAINT user_match FOREIGN KEY (user_id)
-    REFERENCES "user" (id);
+-- Reference: match_user_board_game (table: match)
+ALTER TABLE match ADD CONSTRAINT match_user_board_game FOREIGN KEY (userboardgame_id)
+    REFERENCES user_board_game (id);
 
 -- Reference: match_match_user (table: match_user)
 ALTER TABLE match_user ADD CONSTRAINT match_match_user FOREIGN KEY (match_id)

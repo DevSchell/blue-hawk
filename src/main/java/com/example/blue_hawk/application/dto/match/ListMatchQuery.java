@@ -1,8 +1,7 @@
 package com.example.blue_hawk.application.dto.match;
 
 public record ListMatchQuery(
-        String boardgameId,
-        String userId,
+        String userBoardgameId,
         int page,
         int size
 ) {}

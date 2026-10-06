@@ -32,9 +32,9 @@ public class MatchRepositoryImpl implements IMatchRepository {
     }
 
     @Override
-    public Page<Match> findAll(UUID boardgameId, UUID userId, int page, int size) {
+    public Page<Match> findAll(UUID userBoardgameId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return jpaRepository.findAllFiltered(boardgameId, userId, pageable)
+        return jpaRepository.findAllFiltered(userBoardgameId, pageable)
                 .map(this::toDomain);
     }
 
@@ -51,8 +51,7 @@ public class MatchRepositoryImpl implements IMatchRepository {
     private MatchJpaEntity toJpaEntity(Match domain) {
         return new MatchJpaEntity(
                 domain.getId(),
-                domain.getBoardgameId(),
-                domain.getUserId(),
+                domain.getUserBoardgameId(),
                 domain.getMaxUsers()
         );
     }
@@ -60,8 +59,7 @@ public class MatchRepositoryImpl implements IMatchRepository {
     private Match toDomain(MatchJpaEntity entity) {
         return new Match(
                 entity.getId(),
-                entity.getBoardgameId(),
-                entity.getUserId(),
+                entity.getUserBoardgameId(),
                 entity.getMaxUsers()
         );
     }

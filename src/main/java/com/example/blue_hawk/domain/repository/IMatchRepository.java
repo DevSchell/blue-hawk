@@ -12,7 +12,7 @@ public interface IMatchRepository {
 
     Optional<Match> findById(UUID id);
 
-    Page<Match> findAll(UUID boardgameId, UUID userId, int page, int size);
+    Page<Match> findAll(UUID userBoardgameId, int page, int size);
 
     void deleteById(UUID id);
 

@@ -19,17 +19,15 @@ public class ListMatchUseCaseImpl implements ListMatchUseCase {
 
     @Override
     public List<ListMatchOutput> handle(ListMatchQuery query) {
-        UUID boardgameId = query.boardgameId() != null ? UUID.fromString(query.boardgameId()) : null;
-        UUID userId = query.userId() != null ? UUID.fromString(query.userId()) : null;
+        UUID userBoardgameId = query.userBoardgameId() != null ? UUID.fromString(query.userBoardgameId()) : null;
 
         return matchRepository
-                .findAll(boardgameId, userId, query.page(), query.size())
+                .findAll(userBoardgameId, query.page(), query.size())
                 .getContent()
                 .stream()
                 .map(m -> new ListMatchOutput(
                         m.getId().toString(),
-                        m.getBoardgameId().toString(),
-                        m.getUserId().toString(),
+                        m.getUserBoardgameId().toString(),
                         m.getMaxUsers()))
                 .toList();
     }
