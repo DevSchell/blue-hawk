@@ -1,5 +1,6 @@
 package com.example.blue_hawk.domain.repository;
 
+import com.example.blue_hawk.domain.entity.publisher.Country;
 import com.example.blue_hawk.domain.entity.publisher.Publisher;
 import org.springframework.data.domain.Page;
 
@@ -12,7 +13,7 @@ public interface IPublisherRepository {
 
     Optional<Publisher> findById(UUID publisherId);
 
-    Page<Publisher> findAll(String name, Integer country);
+    Page<Publisher> findAll(String name, Country country);
 
     void deleteById(UUID publisherId);
 

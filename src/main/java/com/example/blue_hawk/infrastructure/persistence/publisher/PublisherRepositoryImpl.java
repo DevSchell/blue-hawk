@@ -1,5 +1,6 @@
 package com.example.blue_hawk.infrastructure.persistence.publisher;
 
+import com.example.blue_hawk.domain.entity.publisher.Country;
 import com.example.blue_hawk.domain.entity.publisher.Publisher;
 import com.example.blue_hawk.domain.repository.IPublisherRepository;
 import org.springframework.data.domain.Page;
@@ -31,7 +32,7 @@ public class PublisherRepositoryImpl implements IPublisherRepository {
     }
 
     @Override
-    public Page<Publisher> findAll(String name, Integer country) {
+    public Page<Publisher> findAll(String name, Country country) {
         return jpaRepository.findAllFiltered(name, country, Pageable.unpaged()).map(this::toDomain);
     }
 

@@ -5,17 +5,17 @@ import java.util.UUID;
 public class Publisher {
     private UUID id;
     private String name;
-    private int country;
+    private Country country;
 
     public Publisher() {}
 
-    public Publisher(String name, int country) {
+    public Publisher(String name, Country country) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.country = country;
     }
 
-    public Publisher(UUID id, String name, int country) {
+    public Publisher(UUID id, String name, Country country) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -37,11 +37,11 @@ public class Publisher {
         this.name = name;
     }
 
-    public int getCountry() {
+    public Country getCountry() {
         return country;
     }
 
-    public void setCountry(int country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 }

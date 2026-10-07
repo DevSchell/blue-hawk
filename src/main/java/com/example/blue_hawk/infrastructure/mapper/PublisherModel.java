@@ -1,5 +1,6 @@
 package com.example.blue_hawk.infrastructure.mapper;
 
+import com.example.blue_hawk.domain.entity.publisher.Country;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -21,5 +22,5 @@ public class PublisherModel {
 
     private String name;
 
-    private int country;
+    private Country country;
 }

@@ -1,7 +1,10 @@
 package com.example.blue_hawk.infrastructure.persistence.publisher;
 
+import com.example.blue_hawk.domain.entity.publisher.Country;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -20,13 +23,15 @@ public class PublisherJpaEntity {
     @Column(name = "name", nullable = false, length = 150)
     private String name;
 
-    @Column(name = "country", nullable = false)
-    private int country;
+    @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(Types.VARCHAR)
+    @Column(name = "country", nullable = false, length = 30)
+    private Country country;
 
     public PublisherJpaEntity() {
     }
 
-    public PublisherJpaEntity(UUID id, String name, int country) {
+    public PublisherJpaEntity(UUID id, String name, Country country) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -48,11 +53,11 @@ public class PublisherJpaEntity {
         this.name = name;
     }
 
-    public int getCountry() {
+    public Country getCountry() {
         return country;
     }
 
-    public void setCountry(int country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 }
