@@ -1,8 +1,7 @@
-package com.example.blue_hawk.application.dto.publisher;
+package com.example.blue_hawk.presentation;
 
 import com.example.blue_hawk.domain.entity.publisher.Country;
-public record ListPublisherOutput(
-        String id,
+public record PublisherRequest(
         String name,
         Country country
 ) {

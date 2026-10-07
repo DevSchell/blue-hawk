@@ -1,5 +1,6 @@
 package com.example.blue_hawk.infrastructure.mapper;
 
+import com.example.blue_hawk.domain.entity.publisher.Country;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -13,20 +14,13 @@ import java.time.LocalDate;
 import java.sql.Types;
 import java.util.UUID;
 
-@Entity
-@Table(name = "publisher")
 @Getter
 @Setter
 @NoArgsConstructor
 public class PublisherModel {
-    @Id
-    @JdbcTypeCode(Types.CHAR)
-    @Column(name = "id", nullable = false, updatable = false, length = 36)
     private UUID uuid;
 
-    @Column(name = "name", nullable = false, length = 150)
     private String name;
 
-    @Column(name = "country", nullable = false)
-    private int country;
+    private Country country;
 }

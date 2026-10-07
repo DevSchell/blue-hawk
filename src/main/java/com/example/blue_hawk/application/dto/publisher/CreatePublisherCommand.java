@@ -1,8 +1,9 @@
 package com.example.blue_hawk.application.dto.publisher;
 
+import com.example.blue_hawk.domain.entity.publisher.Country;
 public record CreatePublisherCommand(
         String id,
         String name,
-        int country
+        Country country
 ) {
 }

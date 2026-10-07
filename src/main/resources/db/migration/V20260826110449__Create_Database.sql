@@ -8,14 +8,14 @@ CREATE TABLE board_game (
     player_number INT           NOT NULL,
     gameplay_time INT           NOT NULL,
     status      VARCHAR(20)     NOT NULL DEFAULT 'ACTIVE',
-    created_at  TIMESTAMP       NOT NULL DEFAULT NOW(),
-    updated_at  TIMESTAMP       NOT NULL DEFAULT NOW(),
+    created_at  DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at  DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT board_game_pk PRIMARY KEY (id),
     CONSTRAINT board_game_status_chk CHECK (status IN ('ACTIVE', 'INACTIVE'))
 );
 
 -- Table: match
-CREATE TABLE match (
+CREATE TABLE `match` (
     id               CHAR(36) NOT NULL,
     userboardgame_id CHAR(36) NOT NULL,
     max_users        INT      NOT NULL,
@@ -47,14 +47,14 @@ CREATE TABLE publisher_board_game (
 );
 
 -- Table: user
-CREATE TABLE "user" (
+CREATE TABLE `user` (
     id         CHAR(36)     NOT NULL,
     name       VARCHAR(150) NOT NULL,
     email      VARCHAR(150) NOT NULL,
     password   VARCHAR(150) NOT NULL,
     role       INT          NOT NULL,
-    created_at TIMESTAMP    NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMP    NOT NULL DEFAULT NOW(),
+    created_at DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT user_pk PRIMARY KEY (id)
 );
 
@@ -84,8 +84,8 @@ CREATE TABLE offer (
     price               DECIMAL(10, 2)  NOT NULL,
     status              VARCHAR(20)     NOT NULL DEFAULT 'ACTIVE',
     description         VARCHAR(500)    NULL,
-    created_at          TIMESTAMP       NOT NULL DEFAULT NOW(),
-    updated_at          TIMESTAMP       NOT NULL DEFAULT NOW(),
+    created_at          DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at          DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT offer_pk PRIMARY KEY (id),
     CONSTRAINT offer_status_chk CHECK (status IN ('ACTIVE', 'INACTIVE', 'SOLD', 'CANCELLED'))
 );
@@ -104,12 +104,12 @@ ALTER TABLE user_review ADD CONSTRAINT board_game_user_review FOREIGN KEY (board
     REFERENCES board_game (id);
 
 -- Reference: match_user_board_game (table: match)
-ALTER TABLE match ADD CONSTRAINT match_user_board_game FOREIGN KEY (userboardgame_id)
+ALTER TABLE `match` ADD CONSTRAINT match_user_board_game FOREIGN KEY (userboardgame_id)
     REFERENCES user_board_game (id);
 
 -- Reference: match_match_user (table: match_user)
 ALTER TABLE match_user ADD CONSTRAINT match_match_user FOREIGN KEY (match_id)
-    REFERENCES match (id);
+    REFERENCES `match` (id);
 
 -- Reference: publisher_publisher_board_game (table: publisher_board_game)
 ALTER TABLE publisher_board_game ADD CONSTRAINT publisher_publisher_board_game FOREIGN KEY (publisher_id)
@@ -117,15 +117,15 @@ ALTER TABLE publisher_board_game ADD CONSTRAINT publisher_publisher_board_game F
 
 -- Reference: user_match_user (table: match_user)
 ALTER TABLE match_user ADD CONSTRAINT user_match_user FOREIGN KEY (user_id)
-    REFERENCES "user" (id);
+    REFERENCES `user` (id);
 
 -- Reference: user_user_board_game (table: user_board_game)
 ALTER TABLE user_board_game ADD CONSTRAINT user_user_board_game FOREIGN KEY (user_id)
-    REFERENCES "user" (id);
+    REFERENCES `user` (id);
 
 -- Reference: user_user_review (table: user_review)
 ALTER TABLE user_review ADD CONSTRAINT user_user_review FOREIGN KEY (user_id)
-    REFERENCES "user" (id);
+    REFERENCES `user` (id);
 
 -- Reference: offer_user_board_game (table: offer)
 ALTER TABLE offer ADD CONSTRAINT offer_user_board_game FOREIGN KEY (userboardgame_id)
