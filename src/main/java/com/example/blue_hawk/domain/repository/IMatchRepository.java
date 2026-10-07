@@ -1,6 +1,6 @@
 package com.example.blue_hawk.domain.repository;
 
-import com.example.blue_hawk.domain.entity.Match;
+import com.example.blue_hawk.domain.entity.match.Match;
 import org.springframework.data.domain.Page;
 
 import java.util.Optional;

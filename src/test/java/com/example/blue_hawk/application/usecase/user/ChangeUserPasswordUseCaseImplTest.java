@@ -1,8 +1,8 @@
 package com.example.blue_hawk.application.usecase.user;
 
 import com.example.blue_hawk.application.dto.user.ChangeUserPasswordCommand;
-import com.example.blue_hawk.domain.entity.User;
-import com.example.blue_hawk.domain.entity.UserRole;
+import com.example.blue_hawk.domain.entity.user.User;
+import com.example.blue_hawk.domain.entity.user.UserRole;
 import com.example.blue_hawk.domain.repository.IUserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

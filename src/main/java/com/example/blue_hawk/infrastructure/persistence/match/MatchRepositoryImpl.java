@@ -1,6 +1,6 @@
 package com.example.blue_hawk.infrastructure.persistence.match;
 
-import com.example.blue_hawk.domain.entity.Match;
+import com.example.blue_hawk.domain.entity.match.Match;
 import com.example.blue_hawk.domain.repository.IMatchRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
