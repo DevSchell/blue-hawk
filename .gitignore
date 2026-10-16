@@ -1,5 +1,47 @@
-.idea/
+# Spring Boot
 target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
 *.iml
-.DS_Store
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+bin/
+
+# Gradle
+.gradle/
+build/
+
+# Database & Credenciais (SENSÍVEL!)
 application.properties
+src/main/resources/application.properties
+application-*.properties
+!src/main/resources/application-example.properties
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Mac OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+package-lock.json
+yarn.lock
