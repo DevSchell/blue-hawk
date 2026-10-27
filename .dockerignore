@@ -1,0 +1,10 @@
+target/
+.git/
+.idea/
+.vscode/
+*.iml
+*.log
+.DS_Store
+src/main/resources/application.properties
+.env
+.env.*
